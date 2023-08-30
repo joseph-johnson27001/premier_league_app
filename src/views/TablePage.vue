@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <h1>TABLE</h1>
-    <table>
+  <div class="table-page">
+    <h1 class="page-title">TABLE</h1>
+    <table class="team-table">
       <thead>
         <tr>
           <th>#</th>
@@ -97,5 +97,45 @@ export default {
 </script>
 
 <style scoped>
-/* Add your table styling here */
+.page-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.team-table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.team-table th,
+.team-table td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+
+.team-table th {
+  background-color: #f8f8f8;
+  color: #333;
+  font-weight: bold;
+}
+
+.team-table tr:hover {
+  background-color: #f2f2f2;
+}
+
+/* Additional styles for table cells */
+.team-name {
+  font-weight: bold;
+}
+
+.negative {
+  color: #d9534f;
+}
+
+.positive {
+  color: #5cb85c;
+}
 </style>

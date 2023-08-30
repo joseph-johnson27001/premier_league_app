@@ -1,42 +1,52 @@
 <template>
-  <div class="player-profile" v-if="player">
-    <h1>{{ player.name }}</h1>
-    <div class="player-details">
-      <p><strong>Position:</strong> {{ player.position }}</p>
-      <p><strong>Date of Birth:</strong> {{ player.dateOfBirth }}</p>
-      <p><strong>Nationality:</strong> {{ player.nationality }}</p>
+  <div class="player-profile">
+    <div v-if="loading">
+      <p>Loading player data...</p>
     </div>
-    <div v-if="player.currentTeam">
-      <h2>Current Team</h2>
-      <div class="team-details">
+    <div v-else>
+      <div class="hero" :style="{ backgroundColor: 'red' }">
+        <div class="hero-overlay">
+          <h1 class="hero-title">{{ player.name }}</h1>
+        </div>
+      </div>
+      <div class="player-details">
         <img
           :src="player.currentTeam.crest"
           :alt="player.currentTeam.name"
-          class="team-crest"
+          class="player-image"
         />
-        <p><strong>Team Name:</strong> {{ player.currentTeam.name }}</p>
-        <p><strong>Address:</strong> {{ player.currentTeam.address }}</p>
-        <p>
-          <strong>Website:</strong>
-          <a :href="player.currentTeam.website" target="_blank">{{
-            player.currentTeam.website
-          }}</a>
-        </p>
-        <p><strong>Founded:</strong> {{ player.currentTeam.founded }}</p>
-        <p><strong>Club Colors:</strong> {{ player.currentTeam.clubColors }}</p>
-        <p><strong>Venue:</strong> {{ player.currentTeam.venue }}</p>
-        <p>
-          <strong>Contract Start:</strong>
-          {{ player.currentTeam.contract.start }}
-        </p>
-        <p>
-          <strong>Contract End:</strong> {{ player.currentTeam.contract.until }}
-        </p>
-        <p><strong>Player Number:</strong> {{ player.shirtNumber }}</p>
-        <p><strong>Position:</strong> {{ player.position }}</p>
+        <div class="player-info">
+          <p class="player-position">{{ player.position }}</p>
+          <p class="player-birth">{{ player.dateOfBirth }}</p>
+          <p class="player-nationality">{{ player.nationality }}</p>
+        </div>
       </div>
-      <h2>Running Competitions</h2>
-      <ul>
+      <h2 class="section-title">Current Team</h2>
+      <div class="team-details">
+        <div class="team-info">
+          <img
+            :src="player.currentTeam.crest"
+            :alt="player.currentTeam.name"
+            class="team-crest"
+          />
+          <div class="team-text">
+            <p class="team-name">{{ player.currentTeam.name }}</p>
+            <p class="team-address">{{ player.currentTeam.address }}</p>
+            <p class="team-website">
+              <a :href="player.currentTeam.website" target="_blank">{{
+                player.currentTeam.website
+              }}</a>
+            </p>
+          </div>
+        </div>
+        <div class="team-extra">
+          <p class="team-founded">{{ player.currentTeam.founded }}</p>
+          <p class="team-colors">{{ player.currentTeam.clubColors }}</p>
+          <p class="team-venue">{{ player.currentTeam.venue }}</p>
+        </div>
+      </div>
+      <h2 class="section-title">Running Competitions</h2>
+      <ul class="competition-list">
         <li
           v-for="competition in player.currentTeam.runningCompetitions"
           :key="competition.id"
@@ -46,13 +56,10 @@
             :alt="competition.name"
             class="competition-emblem"
           />
-          {{ competition.name }}
+          <p class="competition-name">{{ competition.name }}</p>
         </li>
       </ul>
     </div>
-  </div>
-  <div v-else>
-    <p>Loading player data...</p>
   </div>
 </template>
 
@@ -63,11 +70,13 @@ export default {
   name: "PlayerProfilePage",
   data() {
     return {
-      player: {}, // Player data
+      player: {},
+      loading: true, // Add loading state
     };
   },
-  created() {
-    this.fetchPlayerProfile();
+  async created() {
+    await this.fetchPlayerProfile(); // Await the data fetch
+    this.loading = false; // Set loading state to false after fetching data
   },
   methods: {
     async fetchPlayerProfile() {
@@ -75,7 +84,6 @@ export default {
       try {
         const response = await axios.get(`/api/persons/${playerId}`);
         this.player = response.data;
-        console.log(this.player);
       } catch (error) {
         console.error("Error fetching player profile:", error);
       }
@@ -90,18 +98,129 @@ export default {
   padding: 20px;
 }
 
+.hero {
+  position: relative;
+  overflow: hidden;
+  height: 300px;
+}
+
+.hero-background {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+}
+
+.hero-title {
+  font-family: "Montserrat", sans-serif;
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.player-details {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
 .player-image {
-  max-width: 150px;
-  margin-right: 20px;
+  width: 120px;
+  height: auto;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .player-info {
-  line-height: 1.5;
+  margin-left: 20px;
+}
+
+.player-position {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.player-birth,
+.player-nationality {
+  font-size: 14px;
+  color: #777;
+}
+
+.section-title {
+  font-family: "Montserrat", sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 30px;
+}
+
+.team-details {
+  display: flex;
+  margin-top: 20px;
+}
+
+.team-info {
+  display: flex;
+  align-items: center;
+}
+
+.team-crest {
+  width: 80px;
+  height: auto;
+  margin-right: 20px;
+}
+
+.team-text {
+  margin-left: 20px;
+}
+
+.team-name {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.team-address,
+.team-website {
+  font-size: 14px;
+  color: #777;
+}
+
+.team-extra {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.team-founded,
+.team-colors,
+.team-venue {
+  font-size: 14px;
+  color: #777;
+}
+
+.competition-list {
+  display: flex;
+  list-style: none;
+  margin-top: 20px;
+  padding: 0;
 }
 
 .competition-emblem {
-  max-width: 20px;
-  vertical-align: middle;
-  margin-right: 5px;
+  width: 30px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.competition-name {
+  font-size: 14px;
 }
 </style>

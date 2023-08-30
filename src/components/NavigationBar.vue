@@ -44,7 +44,6 @@
 
 <script>
 export default {
-  // ... other component options ...
   methods: {
     isRouteActive(route) {
       return this.$route.path === route;

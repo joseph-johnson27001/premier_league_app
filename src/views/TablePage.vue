@@ -3,7 +3,19 @@
     <h1>Premier League Standings</h1>
     <table class="team-table">
       <thead>
-        <!-- ... table headers ... -->
+        <tr>
+          <th>#</th>
+          <th>Team</th>
+          <th>Pl</th>
+          <th>W</th>
+          <th>D</th>
+          <th>L</th>
+          <th>GF</th>
+          <th>GA</th>
+          <th>GD</th>
+          <th>Pts</th>
+          <th>Last 6</th>
+        </tr>
       </thead>
       <tbody>
         <router-link
@@ -57,6 +69,9 @@ export default {
 </script>
 
 <style scoped>
+.clickable-row {
+  cursor: pointer;
+}
 .page-title {
   font-size: 24px;
   margin-bottom: 20px;

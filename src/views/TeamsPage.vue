@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Teams</h1>
-    <div class="team-dropdown">
+    <div class="team-dropdown" v-if="!selectedTeamId">
       <label for="team">Select Team:</label>
       <select id="team" v-model="selectedTeamId" @change="fetchTeamPlayers">
         <option value="">All Teams</option>
@@ -10,7 +10,7 @@
         </option>
       </select>
     </div>
-    <ul>
+    <ul v-else>
       <li v-for="player in players" :key="player.id">
         <router-link
           :to="{ name: 'player-profile', params: { id: player.id } }"
@@ -29,7 +29,7 @@ export default {
   data() {
     return {
       teams: [],
-      selectedTeamId: "", // Track the selected team's ID
+      selectedTeamId: this.$route.params.teamId,
       players: [],
     };
   },
@@ -53,6 +53,9 @@ export default {
   },
   created() {
     this.fetchTeams();
+    if (this.selectedTeamId) {
+      this.fetchTeamPlayers();
+    }
   },
 };
 </script>

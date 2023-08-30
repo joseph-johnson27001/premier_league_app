@@ -3,22 +3,16 @@
     <h1>Premier League Standings</h1>
     <table class="team-table">
       <thead>
-        <tr>
-          <th>Position</th>
-          <th>Team</th>
-          <th>Pl</th>
-          <th>W</th>
-          <th>D</th>
-          <th>L</th>
-          <th>F</th>
-          <th>A</th>
-          <th>GD</th>
-          <th>Pts</th>
-          <th>Last 6</th>
-        </tr>
+        <!-- ... table headers ... -->
       </thead>
       <tbody>
-        <tr v-for="(team, index) in premierLeagueStandings" :key="team.team.id">
+        <router-link
+          v-for="(team, index) in premierLeagueStandings"
+          :key="team.team.id"
+          :to="{ name: 'Team', params: { teamId: team.team.id } }"
+          tag="tr"
+          class="clickable-row"
+        >
           <td>{{ index + 1 }}</td>
           <td>{{ team.team.name }}</td>
           <td>{{ team.playedGames }}</td>
@@ -30,7 +24,7 @@
           <td>{{ team.goalDifference }}</td>
           <td>{{ team.points }}</td>
           <td>{{ team.form }}</td>
-        </tr>
+        </router-link>
       </tbody>
     </table>
   </div>

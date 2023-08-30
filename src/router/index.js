@@ -24,6 +24,11 @@ const routes = [
     name: "player-profile",
     component: PlayerProfilePage,
   },
+  {
+    path: "/teams/:teamId", // The parameter name matches the one in TablePage.vue
+    name: "Team",
+    component: TeamsPage,
+  },
 ];
 
 const router = new VueRouter({

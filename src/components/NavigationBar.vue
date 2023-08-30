@@ -27,10 +27,10 @@
         >Results</router-link
       >
       <router-link
-        to="/players"
+        to="/teams"
         class="nav-link"
-        :class="{ 'active-link': isRouteActive('/players') }"
-        >Players</router-link
+        :class="{ 'active-link': isRouteActive('/teams') }"
+        >Teams</router-link
       >
       <router-link
         to="/news"

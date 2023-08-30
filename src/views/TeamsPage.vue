@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Players</h1>
+    <h1>Teams</h1>
     <div class="team-dropdown">
       <label for="team">Select Team:</label>
       <select id="team" v-model="selectedTeamId" @change="fetchTeamPlayers">

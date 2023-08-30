@@ -6,7 +6,7 @@ import HomePage from "@/views/HomePage.vue";
 import TablePage from "@/views/TablePage.vue";
 import FixturesPage from "@/views/FixturesPage.vue";
 import ResultsPage from "@/views/ResultsPage.vue";
-import PlayersPage from "@/views/PlayersPage.vue";
+import TeamsPage from "@/views/TeamsPage.vue";
 import PlayerProfilePage from "@/components/PlayerProfilePage.vue";
 import NewsPage from "@/views/NewsPage.vue";
 
@@ -17,7 +17,7 @@ const routes = [
   { path: "/table", component: TablePage },
   { path: "/fixtures", component: FixturesPage },
   { path: "/results", component: ResultsPage },
-  { path: "/players", component: PlayersPage },
+  { path: "/teams", component: TeamsPage },
   { path: "/news", component: NewsPage },
   {
     path: "/players/:id",

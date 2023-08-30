@@ -6,39 +6,50 @@
       <p><strong>Date of Birth:</strong> {{ player.dateOfBirth }}</p>
       <p><strong>Nationality:</strong> {{ player.nationality }}</p>
     </div>
-    <h2>Current Team</h2>
-    <div class="team-details">
-      <img
-        :src="player.currentTeam.crest"
-        :alt="player.currentTeam.name"
-        class="team-crest"
-      />
-      <p><strong>Team Name:</strong> {{ player.currentTeam.name }}</p>
-      <p><strong>Address:</strong> {{ player.currentTeam.address }}</p>
-      <p>
-        <strong>Website:</strong>
-        <a :href="player.currentTeam.website" target="_blank">{{
-          player.currentTeam.website
-        }}</a>
-      </p>
-      <p><strong>Founded:</strong> {{ player.currentTeam.founded }}</p>
-      <p><strong>Club Colors:</strong> {{ player.currentTeam.clubColors }}</p>
-      <p><strong>Venue:</strong> {{ player.currentTeam.venue }}</p>
-    </div>
-    <h2>Running Competitions</h2>
-    <ul>
-      <li
-        v-for="competition in player.currentTeam.runningCompetitions"
-        :key="competition.id"
-      >
+    <div v-if="player.currentTeam">
+      <h2>Current Team</h2>
+      <div class="team-details">
         <img
-          :src="competition.emblem"
-          :alt="competition.name"
-          class="competition-emblem"
+          :src="player.currentTeam.crest"
+          :alt="player.currentTeam.name"
+          class="team-crest"
         />
-        {{ competition.name }}
-      </li>
-    </ul>
+        <p><strong>Team Name:</strong> {{ player.currentTeam.name }}</p>
+        <p><strong>Address:</strong> {{ player.currentTeam.address }}</p>
+        <p>
+          <strong>Website:</strong>
+          <a :href="player.currentTeam.website" target="_blank">{{
+            player.currentTeam.website
+          }}</a>
+        </p>
+        <p><strong>Founded:</strong> {{ player.currentTeam.founded }}</p>
+        <p><strong>Club Colors:</strong> {{ player.currentTeam.clubColors }}</p>
+        <p><strong>Venue:</strong> {{ player.currentTeam.venue }}</p>
+        <p>
+          <strong>Contract Start:</strong>
+          {{ player.currentTeam.contract.start }}
+        </p>
+        <p>
+          <strong>Contract End:</strong> {{ player.currentTeam.contract.until }}
+        </p>
+        <p><strong>Player Number:</strong> {{ player.shirtNumber }}</p>
+        <p><strong>Position:</strong> {{ player.position }}</p>
+      </div>
+      <h2>Running Competitions</h2>
+      <ul>
+        <li
+          v-for="competition in player.currentTeam.runningCompetitions"
+          :key="competition.id"
+        >
+          <img
+            :src="competition.emblem"
+            :alt="competition.name"
+            class="competition-emblem"
+          />
+          {{ competition.name }}
+        </li>
+      </ul>
+    </div>
   </div>
   <div v-else>
     <p>Loading player data...</p>
@@ -64,6 +75,7 @@ export default {
       try {
         const response = await axios.get(`/api/persons/${playerId}`);
         this.player = response.data;
+        console.log(this.player);
       } catch (error) {
         console.error("Error fetching player profile:", error);
       }

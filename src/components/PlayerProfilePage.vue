@@ -1,12 +1,17 @@
 <template>
-  <div class="player-profile-page">
-    <h1>Player Profile</h1>
-    <div v-if="player">
-      <h2>{{ player.name }}</h2>
-      <img :src="player.image" alt="Player" />
-      <p>{{ player.summary }}</p>
-      <!-- Display other player information here -->
+  <div class="player-profile">
+    <h1>{{ player.name }}</h1>
+    <div class="player-details">
+      <div class="player-image">
+        <img :src="player.image" :alt="player.name" />
+      </div>
+      <div class="player-info">
+        <p><strong>Position:</strong> {{ player.position }}</p>
+        <p><strong>Date of Birth:</strong> {{ player.dateOfBirth }}</p>
+        <!-- Display more player information here -->
+      </div>
     </div>
+    <!-- Display player statistics, performance history, etc. -->
   </div>
 </template>
 
@@ -14,23 +19,23 @@
 import axios from "axios";
 
 export default {
-  name: "PlayerProfilePage",
   data() {
     return {
-      player: null,
+      player: {},
     };
   },
   created() {
-    this.fetchPlayer();
+    const playerId = this.$route.params.id;
+    this.fetchPlayerData(playerId);
   },
   methods: {
-    async fetchPlayer() {
-      const playerId = this.$route.params.id; // Get player ID from route parameter
+    async fetchPlayerData() {
+      const playerId = this.$route.params.id; // Get player ID from route params
       try {
         const response = await axios.get(`/api/persons/${playerId}`);
         this.player = response.data;
       } catch (error) {
-        console.error("Error fetching player:", error);
+        console.error("Error fetching player data:", error);
       }
     },
   },
@@ -38,5 +43,5 @@ export default {
 </script>
 
 <style scoped>
-/* Add styles here */
+/* Add your styles here */
 </style>

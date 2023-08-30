@@ -1,18 +1,20 @@
 <template>
-  <div class="players-page">
+  <div>
     <h1>Players</h1>
     <div class="team-dropdown">
       <label for="team">Select Team:</label>
       <select id="team" v-model="selectedTeamId" @change="fetchTeamPlayers">
-        <option value="">Select a team</option>
+        <option value="">All Teams</option>
         <option v-for="team in teams" :key="team.id" :value="team.id">
           {{ team.name }}
         </option>
       </select>
     </div>
-    <ul v-if="players.length">
+    <ul>
       <li v-for="player in players" :key="player.id">
-        <router-link :to="{ name: 'PlayerProfile', params: { id: player.id } }">
+        <router-link
+          :to="{ name: 'player-profile', params: { id: player.id } }"
+        >
           {{ player.name }}
         </router-link>
       </li>
@@ -26,8 +28,8 @@ import axios from "axios";
 export default {
   data() {
     return {
-      selectedTeamId: "",
       teams: [],
+      selectedTeamId: "", // Track the selected team's ID
       players: [],
     };
   },

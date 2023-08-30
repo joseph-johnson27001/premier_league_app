@@ -19,7 +19,12 @@ const routes = [
   { path: "/results", component: ResultsPage },
   { path: "/players", component: PlayersPage },
   { path: "/news", component: NewsPage },
-  { path: "/players/:id", component: PlayerProfilePage },
+  {
+    path: "/players/:id",
+    name: "player-profile",
+    component: PlayerProfilePage,
+    props: true,
+  },
 ];
 
 const router = new VueRouter({

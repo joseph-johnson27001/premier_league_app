@@ -1,5 +1,5 @@
 <template>
-  <nav class="navigation">
+  <nav class="navigation-bar">
     <router-link
       to="/"
       class="nav-link"
@@ -35,6 +35,7 @@
 
 <script>
 export default {
+  // ... other component options ...
   methods: {
     isRouteActive(route) {
       return this.$route.path === route;
@@ -44,7 +45,7 @@ export default {
 </script>
 
 <style scoped>
-.navigation {
+.navigation-bar {
   display: flex;
   justify-content: center;
   background-color: #333;
@@ -63,6 +64,26 @@ export default {
 }
 
 .active-link {
-  color: #ff9900; /* Change to your desired active color */
+  color: #ff9900;
+}
+
+/* Custom styles for classic black or dark gray */
+.navigation-bar {
+  background-color: #222; /* Dark gray background */
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  transition: color 0.3s;
+}
+
+.nav-link:hover {
+  color: #ff9900;
+}
+
+.active-link {
+  color: #ff9900;
 }
 </style>

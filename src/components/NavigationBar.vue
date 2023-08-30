@@ -66,10 +66,6 @@ export default {
   transition: color 0.3s;
 }
 
-#home-button {
-  margin-left: 0px;
-}
-
 .nav-link:hover {
   color: #ffd700;
 }

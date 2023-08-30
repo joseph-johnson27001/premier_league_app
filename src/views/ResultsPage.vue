@@ -14,62 +14,35 @@
         :key="result.id"
         class="result-item"
       >
-        <span class="team-name">{{ result.homeTeam }}</span>
-        <span class="score"
-          >{{ result.homeScore }} - {{ result.awayScore }}</span
-        >
-        <span class="team-name">{{ result.awayTeam }}</span>
+        <span class="team-name">{{ result.homeTeam.name }}</span>
+        <span class="score" v-if="result.status === 'FINISHED'">
+          {{ result.score.fullTime.home }} -
+          {{ result.score.fullTime.away }}
+        </span>
+        <span class="vs" v-else-if="result.status === 'SCHEDULED'">vs</span>
+        <span class="team-name">{{ result.awayTeam.name }}</span>
+        <!-- <span class="date">{{
+          new Date(result.utcDate).toLocaleString()
+        }}</span> -->
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "ResultsPage",
   data() {
     return {
       selectedTeam: "",
-      teams: ["Team A", "Team B", "Team C", "Team D"],
-      results: [
-        {
-          id: 1,
-          homeTeam: "Team A",
-          homeScore: 2,
-          awayScore: 1,
-          awayTeam: "Team B",
-        },
-        {
-          id: 2,
-          homeTeam: "Team C",
-          homeScore: 0,
-          awayScore: 0,
-          awayTeam: "Team D",
-        },
-        {
-          id: 3,
-          homeTeam: "Team B",
-          homeScore: 3,
-          awayScore: 2,
-          awayTeam: "Team D",
-        },
-        {
-          id: 4,
-          homeTeam: "Team A",
-          homeScore: 1,
-          awayScore: 1,
-          awayTeam: "Team C",
-        },
-        {
-          id: 5,
-          homeTeam: "Team D",
-          homeScore: 2,
-          awayScore: 0,
-          awayTeam: "Team B",
-        },
-        // Add more results...
-      ],
+      teams: [],
+      results: [],
     };
+  },
+  created() {
+    this.fetchTeamsAndResults();
   },
   computed: {
     filteredResults() {
@@ -78,13 +51,32 @@ export default {
       } else {
         return this.results.filter(
           (result) =>
-            result.homeTeam === this.selectedTeam ||
-            result.awayTeam === this.selectedTeam
+            result.homeTeam.name === this.selectedTeam ||
+            result.awayTeam.name === this.selectedTeam
         );
       }
     },
   },
   methods: {
+    async fetchTeamsAndResults() {
+      try {
+        const teamsResponse = await axios.get("/api/competitions/PL/teams");
+        this.teams = teamsResponse.data.teams.map((team) => team.name);
+        console.log(teamsResponse);
+
+        const resultsResponse = await axios.get(
+          "/api/competitions/PL/matches?status=FINISHED"
+        );
+        console.log(resultsResponse);
+
+        const currentDate = new Date();
+        this.results = resultsResponse.data.matches.filter(
+          (result) => new Date(result.utcDate) <= currentDate
+        );
+      } catch (error) {
+        console.error("Error fetching teams and results:", error);
+      }
+    },
     updateSelectedTeam(event) {
       this.selectedTeam = event.target.value;
     },

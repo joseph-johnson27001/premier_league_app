@@ -1,17 +1,18 @@
 <template>
-  <div class="home-page">
-    <!-- Your component content here -->
-    <h1>HOME</h1>
+  <div>
+    <h1 class="page-title">HOME</h1>
   </div>
 </template>
-
 <script>
 export default {
   name: "HomePage",
-  // ... other component options ...
 };
 </script>
 
 <style scoped>
-/* Your component styles here */
+.page-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
 </style>

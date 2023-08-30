@@ -1,6 +1,6 @@
 <template>
   <div class="results-page">
-    <h1 class="page-title">Results</h1>
+    <h1 class="page-title">RESULTS</h1>
     <div class="team-dropdown">
       <label for="team">Select Team:</label>
       <select id="team" v-model="selectedTeam" @change="updateSelectedTeam">

@@ -1,6 +1,6 @@
 <template>
   <div class="news-page">
-    <h1>NEWS</h1>
+    <h1 class="page-title">NEWS</h1>
     <div class="news-list">
       <div v-for="story in sportsNews" :key="story.id" class="news-item">
         <img :src="story.image" alt="News Image" class="news-image" />
@@ -43,10 +43,11 @@ export default {
 </script>
 
 <style scoped>
-.news-page {
-  padding: 20px;
+.page-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
 }
-
 .news-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));

@@ -45,45 +45,26 @@ export default {
 </script>
 
 <style scoped>
+/* Custom styles for navy blue navigation bar */
 .navigation-bar {
   display: flex;
   justify-content: center;
-  background-color: #333;
+  background-color: #004080; /* Navy blue background */
   padding: 10px 0;
 }
 
 .nav-link {
-  color: white;
+  color: white; /* White text color */
   text-decoration: none;
   margin: 0 15px;
   transition: color 0.3s;
 }
 
 .nav-link:hover {
-  color: #ff9900;
+  color: #ffd700; /* Gold color on hover */
 }
 
 .active-link {
-  color: #ff9900;
-}
-
-/* Custom styles for classic black or dark gray */
-.navigation-bar {
-  background-color: #222; /* Dark gray background */
-}
-
-.nav-link {
-  color: white;
-  text-decoration: none;
-  margin: 0 15px;
-  transition: color 0.3s;
-}
-
-.nav-link:hover {
-  color: #ff9900;
-}
-
-.active-link {
-  color: #ff9900;
+  color: #ffd700; /* Gold color for active link */
 }
 </style>

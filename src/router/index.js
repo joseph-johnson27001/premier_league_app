@@ -23,7 +23,6 @@ const routes = [
     path: "/players/:id",
     name: "player-profile",
     component: PlayerProfilePage,
-    props: true,
   },
 ];
 

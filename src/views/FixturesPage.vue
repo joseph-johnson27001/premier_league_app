@@ -14,31 +14,31 @@
         :key="fixture.id"
         class="fixture-item"
       >
-        <span class="team-name">{{ fixture.homeTeam }}</span>
+        <span class="team-name">{{ fixture.homeTeam.name }}</span>
         <span class="vs">vs</span>
-        <span class="team-name">{{ fixture.awayTeam }}</span>
-        <!-- <span class="date">{{ fixture.date }}</span> -->
+        <span class="team-name">{{ fixture.awayTeam.name }}</span>
+        <!-- <span class="date">{{
+          new Date(fixture.utcDate).toLocaleString()
+        }}</span> -->
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "FixturesPage",
   data() {
     return {
       selectedTeam: "",
-      teams: ["Team A", "Team B", "Team C", "Team D"],
-      fixtures: [
-        { id: 1, homeTeam: "Team A", awayTeam: "Team B", date: "2023-09-01" },
-        { id: 2, homeTeam: "Team C", awayTeam: "Team D", date: "2023-09-02" },
-        { id: 3, homeTeam: "Team B", awayTeam: "Team D", date: "2023-09-03" },
-        { id: 4, homeTeam: "Team A", awayTeam: "Team C", date: "2023-09-04" },
-        { id: 5, homeTeam: "Team D", awayTeam: "Team B", date: "2023-09-05" },
-        // Add more fixtures...
-      ],
+      teams: [],
+      fixtures: [],
     };
+  },
+  created() {
+    this.fetchTeamsAndFixtures();
   },
   computed: {
     filteredFixtures() {
@@ -47,13 +47,33 @@ export default {
       } else {
         return this.fixtures.filter(
           (fixture) =>
-            fixture.homeTeam === this.selectedTeam ||
-            fixture.awayTeam === this.selectedTeam
+            fixture.homeTeam.name === this.selectedTeam ||
+            fixture.awayTeam.name === this.selectedTeam
         );
       }
     },
   },
   methods: {
+    async fetchTeamsAndFixtures() {
+      try {
+        const teamsResponse = await axios.get(
+          "/api/competitions/PL/teams" // Use the appropriate API endpoint for teams
+        );
+        this.teams = teamsResponse.data.teams.map((team) => team.name);
+
+        const fixturesResponse = await axios.get(
+          "/api/competitions/PL/matches" // Use the appropriate API endpoint for fixtures
+        );
+
+        // Filter upcoming fixtures based on the current date
+        const currentDate = new Date();
+        this.fixtures = fixturesResponse.data.matches.filter(
+          (fixture) => new Date(fixture.utcDate) > currentDate
+        );
+      } catch (error) {
+        console.error("Error fetching teams and fixtures:", error);
+      }
+    },
     updateSelectedTeam(event) {
       this.selectedTeam = event.target.value;
     },

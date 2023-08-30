@@ -1,5 +1,6 @@
 <template>
-  <div class="table-page">
+  <div>
+    <h1>TABLE</h1>
     <table>
       <thead>
         <tr>
@@ -97,8 +98,4 @@ export default {
 
 <style scoped>
 /* Add your table styling here */
-
-.table-page {
-  background-color: red;
-}
 </style>

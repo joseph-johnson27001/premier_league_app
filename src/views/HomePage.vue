@@ -1,7 +1,7 @@
 <template>
   <div class="home-page">
     <!-- Your component content here -->
-    <h1>HELLO</h1>
+    <h1>HOME</h1>
   </div>
 </template>
 

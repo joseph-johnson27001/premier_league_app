@@ -3,10 +3,20 @@
     <div v-if="loading">
       <p>Loading player data...</p>
     </div>
-    <div v-else>
-      <div class="hero" :style="{ backgroundColor: 'red' }">
+    <div class="player-profile" v-else>
+      <div
+        class="hero"
+        :style="{
+          backgroundColor: player.currentTeam.clubColors.split(' / ')[0],
+        }"
+      >
         <div class="hero-overlay">
-          <h1 class="hero-title">{{ player.name }}</h1>
+          <h1
+            class="hero-title"
+            :style="{ color: player.currentTeam.clubColors.split(' / ')[1] }"
+          >
+            {{ player.name }}
+          </h1>
         </div>
       </div>
       <div class="player-details">

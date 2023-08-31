@@ -28,7 +28,6 @@
         <div class="player-cards">
           <div class="player-card" v-for="player in players" :key="player.id">
             <div class="player-card-header">
-              <!-- <img :src="getPlayerImage(player)" :alt="player.name" /> -->
               <h4 class="player-name">{{ player.name }}</h4>
             </div>
             <p class="player-position">{{ player.position }}</p>
@@ -112,7 +111,7 @@ export default {
   color: #333;
 }
 
-.team-details {
+.team-header {
   display: flex;
   align-items: center;
   margin-top: 20px;
@@ -142,17 +141,15 @@ export default {
 }
 
 .category-title {
-  font-size: 16px;
-  margin-top: 10px;
-  color: #666;
-  text-transform: uppercase;
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #333;
 }
 
 .player-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 20px;
-  margin-top: 10px;
 }
 
 .player-card {
@@ -161,31 +158,19 @@ export default {
   padding: 15px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex: 1;
+  min-width: calc(25% - 20px);
+  max-width: calc(25% - 20px);
 }
 
 .player-card:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.player-card-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.player-card-header img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  margin-right: 10px;
-}
-
 .player-name {
   font-size: 16px;
-  color: #333;
+  margin-top: 10px;
+  text-align: center;
 }
 
 .player-position,

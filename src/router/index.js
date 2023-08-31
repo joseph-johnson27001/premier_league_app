@@ -1,4 +1,3 @@
-// router/index.js
 import Vue from "vue";
 import VueRouter from "vue-router";
 
@@ -7,6 +6,7 @@ import TablePage from "@/views/TablePage.vue";
 import FixturesPage from "@/views/FixturesPage.vue";
 import ResultsPage from "@/views/ResultsPage.vue";
 import TeamsPage from "@/views/TeamsPage.vue";
+import TeamPage from "@/views/TeamPage.vue"; // Import the TeamPage component
 import PlayerProfilePage from "@/components/PlayerProfilePage.vue";
 import NewsPage from "@/views/NewsPage.vue";
 
@@ -25,9 +25,9 @@ const routes = [
     component: PlayerProfilePage,
   },
   {
-    path: "/teams/:teamId", // The parameter name matches the one in TablePage.vue
+    path: "/teams/:teamId",
     name: "Team",
-    component: TeamsPage,
+    component: TeamPage, // Use the TeamPage component here
   },
 ];
 

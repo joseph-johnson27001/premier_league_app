@@ -53,9 +53,6 @@ export default {
   },
   created() {
     this.fetchTeams();
-    if (this.selectedTeamId) {
-      this.fetchTeamPlayers(this.selectedTeamId);
-    }
   },
 };
 </script>
@@ -68,12 +65,9 @@ export default {
 }
 .team-cards {
   display: grid;
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(200px, 1fr)
-  ); /* Responsive grid */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
-  justify-content: center; /* Center the cards horizontally */
+  justify-content: center;
 }
 
 .team-card {
@@ -101,13 +95,9 @@ export default {
   text-align: center;
 }
 
-/* Media query for adjusting columns on smaller screens */
 @media (max-width: 768px) {
   .team-cards {
-    grid-template-columns: repeat(
-      auto-fit,
-      minmax(150px, 1fr)
-    ); /* Adjust column width */
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   }
 }
 </style>

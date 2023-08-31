@@ -3,21 +3,33 @@
     <p>Loading...</p>
   </div>
   <div class="all-teams-page" v-else>
+    <div class="league-header">
+      <h1 class="league-name">Premier League Teams</h1>
+      <img
+        src="https://crests.football-data.org/PL.png"
+        alt="Premier League Crest"
+        class="league-logo"
+      />
+    </div>
     <div class="team-list">
-      <div class="team-card" v-for="team in teams" :key="team.id">
-        <div class="team-logo-container">
-          <img
-            :src="team.crest"
-            :alt="team.name + ' Crest'"
-            class="team-logo"
-          />
+      <router-link
+        v-for="team in teams"
+        :key="team.id"
+        :to="`/teams/${team.id}`"
+        class="team-card-link"
+      >
+        <div class="team-card">
+          <div class="team-logo-container">
+            <img
+              :src="team.crest"
+              :alt="team.name + ' Crest'"
+              class="team-logo"
+            />
+          </div>
+          <h3 class="team-card-title">{{ team.name }}</h3>
+          <p class="team-card-founded">Founded: {{ team.founded }}</p>
         </div>
-        <h3 class="team-card-title">{{ team.name }}</h3>
-        <p class="team-card-founded">Founded: {{ team.founded }}</p>
-        <router-link :to="`/teams/${team.id}`" class="team-card-link"
-          >View Team</router-link
-        >
-      </div>
+      </router-link>
     </div>
   </div>
 </template>
@@ -35,6 +47,7 @@ export default {
   async created() {
     try {
       const response = await axios.get("/api/competitions/PL/teams");
+      console.log(response);
       this.teams = response.data.teams.sort((a, b) => {
         return a.name.localeCompare(b.name); // Sort alphabetically
       });
@@ -53,10 +66,11 @@ export default {
   padding: 20px;
 }
 
-.team-header {
+.league-header {
   background-color: #333;
   color: white;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   padding: 20px;
   border-radius: 10px;
@@ -64,13 +78,13 @@ export default {
   margin: -20px -20px 20px -20px;
 }
 
-.team-logo {
+.league-logo {
   width: 100px;
   height: 100px;
-  margin-right: 20px;
+  margin-left: 20px;
 }
 
-.team-name {
+.league-name {
   font-family: "Montserrat", sans-serif;
   font-size: 32px;
   font-weight: bold;
@@ -89,6 +103,8 @@ export default {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
+  max-height: 250px; /* Set a maximum height for the cards */
+  overflow: hidden; /* Hide overflow content if the card becomes taller */
   transition: transform 0.3s, box-shadow 0.3s;
   cursor: pointer;
   text-align: center;
@@ -99,11 +115,26 @@ export default {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
+.team-logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.team-logo {
+  width: 80px;
+  height: 80px;
+}
+
 .team-card-title {
   font-size: 24px;
   font-weight: bold;
   margin-top: 10px;
   color: #333;
+  white-space: nowrap; /* Prevent team name from wrapping */
+  overflow: hidden; /* Hide overflow content if the name is too long */
+  text-overflow: ellipsis; /* Show ellipsis (...) for truncated text */
 }
 
 .team-card-founded {

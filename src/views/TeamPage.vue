@@ -13,9 +13,6 @@
           }})
         </p>
         <p class="team-founded">Founded: {{ selectedTeam.founded }}</p>
-        <p class="team-club-colors">
-          Club Colors: {{ selectedTeam.clubColors }}
-        </p>
         <p class="team-website">
           Website:
           <a :href="selectedTeam.website" target="_blank">{{

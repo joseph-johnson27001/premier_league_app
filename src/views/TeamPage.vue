@@ -1,6 +1,9 @@
 <template>
   <div class="team-page">
-    <div class="team-header">
+    <div v-if="isLoading" class="loading-indicator">
+      <p>Loading...</p>
+    </div>
+    <div class="team-header" v-else>
       <img :src="selectedTeam.crest" :alt="selectedTeam.name + ' Crest'" />
       <div class="team-info">
         <h1 class="team-name">{{ selectedTeam.name }}</h1>
@@ -47,6 +50,7 @@ export default {
     return {
       selectedTeamId: this.$route.params.teamId,
       selectedTeam: {},
+      isLoading: true,
     };
   },
   computed: {
@@ -58,22 +62,25 @@ export default {
         Forward: [],
       };
 
-      this.selectedTeam.squad.forEach((player) => {
-        const position = player.position ? player.position.toLowerCase() : "";
-        if (position.includes("goalkeeper")) {
-          categorizedPlayers.Goalkeeper.push(player);
-        } else if (position.includes("defence")) {
-          categorizedPlayers.Defender.push(player);
-        } else if (position.includes("midfield")) {
-          categorizedPlayers.Midfielder.push(player);
-        } else if (position.includes("offence")) {
-          categorizedPlayers.Forward.push(player);
-        }
-      });
+      if (this.selectedTeam.squad) {
+        this.selectedTeam.squad.forEach((player) => {
+          const position = player.position ? player.position.toLowerCase() : "";
+          if (position.includes("goalkeeper")) {
+            categorizedPlayers.Goalkeeper.push(player);
+          } else if (position.includes("defence")) {
+            categorizedPlayers.Defender.push(player);
+          } else if (position.includes("midfield")) {
+            categorizedPlayers.Midfielder.push(player);
+          } else if (position.includes("offence")) {
+            categorizedPlayers.Forward.push(player);
+          }
+        });
+      }
 
       return categorizedPlayers;
     },
   },
+
   methods: {
     getCategoryTitle(category) {
       switch (category) {
@@ -93,6 +100,7 @@ export default {
       try {
         const response = await axios.get(`/api/teams/${this.selectedTeamId}`);
         this.selectedTeam = response.data;
+        this.isLoading = false; // Data is loaded, set loading state to false
       } catch (error) {
         console.error("Error fetching team details:", error);
       }
@@ -105,39 +113,28 @@ export default {
 </script>
 
 <style scoped>
-.page-title {
-  font-size: 24px;
-  margin-bottom: 20px;
-  color: #333;
+.loading-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150px; /* Adjust height as needed */
+  font-size: 18px;
+  color: #666;
 }
-
 .team-header {
   display: flex;
   align-items: center;
   margin-top: 20px;
 }
 
-.team-logo img {
-  width: 150px;
-  height: 150px;
-}
-
 .team-info {
   margin-left: 20px;
-}
-
-.team-info p {
-  margin: 5px 0;
 }
 
 .section-title {
   font-size: 18px;
   margin-top: 20px;
   color: #333;
-}
-
-.player-categories {
-  margin-top: 20px;
 }
 
 .category-title {
@@ -147,9 +144,9 @@ export default {
 }
 
 .player-cards {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
   gap: 20px;
+  margin-top: 20px;
 }
 
 .player-card {
@@ -158,9 +155,7 @@ export default {
   padding: 15px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s;
-  flex: 1;
-  min-width: calc(25% - 20px);
-  max-width: calc(25% - 20px);
+  height: 150px;
 }
 
 .player-card:hover {
@@ -177,5 +172,23 @@ export default {
 .player-nationality {
   font-size: 14px;
   color: #666;
+}
+
+.player-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .player-cards {
+    grid-template-columns: repeat(auto-fill, minmax(33%, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .player-cards {
+    grid-template-columns: 1fr;
+  }
 }
 </style>

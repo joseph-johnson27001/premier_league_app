@@ -14,7 +14,6 @@
         </p>
         <p class="team-founded">Founded: {{ selectedTeam.founded }}</p>
         <p class="team-website">
-          Website:
           <a :href="selectedTeam.website" target="_blank">{{
             selectedTeam.website
           }}</a>
@@ -26,11 +25,13 @@
         <h3 class="category-title">{{ getCategoryTitle(category) }}</h3>
         <div class="player-cards">
           <div class="player-card" v-for="player in players" :key="player.id">
-            <div class="player-card-header">
-              <h4 class="player-name">{{ player.name }}</h4>
-            </div>
-            <p class="player-position">{{ player.position }}</p>
-            <p class="player-nationality">{{ player.nationality }}</p>
+            <router-link :to="`/players/${player.id}`" class="player-link">
+              <div class="player-card-header">
+                <h4 class="player-name">{{ player.name }}</h4>
+              </div>
+              <p class="player-position">{{ player.position }}</p>
+              <p class="player-nationality">{{ player.nationality }}</p>
+            </router-link>
           </div>
         </div>
       </div>
@@ -203,6 +204,27 @@ export default {
   font-size: 14px;
   color: #666;
   margin: 5px 0;
+}
+
+.category-title,
+.player-name,
+.player-position,
+.player-nationality {
+  color: #333; /* Adjust the color as needed */
+  /* Add any other desired styling here */
+}
+
+/* Style for link text */
+.team-website a,
+.player-link {
+  color: #3498db;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.team-website a:hover,
+.player-link:hover {
+  color: #1e87dc;
 }
 
 /* Additional Media Queries for Ultra-small Devices */

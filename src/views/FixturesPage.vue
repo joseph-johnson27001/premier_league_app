@@ -1,6 +1,8 @@
 <template>
   <div class="fixtures-page">
-    <h1 class="page-title">FIXTURES</h1>
+    <div class="fixtures-header">
+      <h1 class="fixtures-name">Premier League Teams</h1>
+    </div>
     <div class="team-dropdown">
       <label for="team">Select Team:</label>
       <select id="team" v-model="selectedTeam" @change="updateSelectedTeam">
@@ -82,6 +84,20 @@ export default {
 </script>
 
 <style scoped>
+.fixtures-header {
+  background-color: #333;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin: -20px -20px 20px -20px;
+}
+
+.team-info {
+  flex: 1;
+}
 .page-title {
   font-size: 24px;
   margin-bottom: 20px;

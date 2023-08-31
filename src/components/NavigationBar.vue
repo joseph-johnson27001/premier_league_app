@@ -1,49 +1,12 @@
 <template>
   <nav class="navigation-bar">
     <div class="navigation-container">
-      <router-link
-        to="/"
-        class="nav-link"
-        :class="{ 'active-link': isRouteActive('/') }"
-        id="home-button"
-      >
-        Home
-      </router-link>
-      <router-link
-        to="/table"
-        class="nav-link"
-        :class="{ 'active-link': isRouteActive('/table') }"
-      >
-        Table
-      </router-link>
-      <router-link
-        to="/fixtures"
-        class="nav-link"
-        :class="{ 'active-link': isRouteActive('/fixtures') }"
-      >
-        Fixtures
-      </router-link>
-      <router-link
-        to="/results"
-        class="nav-link"
-        :class="{ 'active-link': isRouteActive('/results') }"
-      >
-        Results
-      </router-link>
-      <router-link
-        to="/teams"
-        class="nav-link"
-        :class="{ 'active-link': isRouteActive('/teams') }"
-      >
-        Teams
-      </router-link>
-      <router-link
-        to="/news"
-        class="nav-link"
-        :class="{ 'active-link': isRouteActive('/news') }"
-      >
-        News
-      </router-link>
+      <router-link to="/" class="nav-link" id="home-button"> Home </router-link>
+      <router-link to="/table" class="nav-link"> Table </router-link>
+      <router-link to="/fixtures" class="nav-link"> Fixtures </router-link>
+      <router-link to="/results" class="nav-link"> Results </router-link>
+      <router-link to="/teams" class="nav-link"> Teams </router-link>
+      <router-link to="/news" class="nav-link"> News </router-link>
     </div>
   </nav>
 </template>

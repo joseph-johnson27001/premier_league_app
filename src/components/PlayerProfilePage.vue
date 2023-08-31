@@ -96,6 +96,7 @@ export default {
       try {
         const response = await axios.get(`/api/persons/${playerId}`);
         this.player = response.data;
+        console.log(this.player);
       } catch (error) {
         console.error("Error fetching player profile:", error);
       }

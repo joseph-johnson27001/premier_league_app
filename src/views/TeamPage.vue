@@ -24,7 +24,6 @@
         </p>
       </div>
     </div>
-    <h2 class="section-title">Players</h2>
     <div class="player-categories">
       <div v-for="(players, category) in categorizedPlayers" :key="category">
         <h3 class="category-title">{{ getCategoryTitle(category) }}</h3>
@@ -113,83 +112,120 @@ export default {
 </script>
 
 <style scoped>
-.loading-indicator {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 150px; /* Adjust height as needed */
-  font-size: 18px;
-  color: #666;
+.team-page {
+  font-family: "Arial", sans-serif;
+  background-color: #f5f5f5;
+  padding: 20px;
 }
+
 .team-header {
+  background-color: #333;
+  color: white;
   display: flex;
   align-items: center;
-  margin-top: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  margin: -20px -20px 0px -20px;
+}
+
+.team-logo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-right: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .team-info {
-  margin-left: 20px;
+  flex: 1;
 }
 
-.section-title {
-  font-size: 18px;
-  margin-top: 20px;
-  color: #333;
+.team-name {
+  font-family: "Montserrat", sans-serif;
+  font-size: 32px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.team-manager,
+.team-founded,
+.team-club-colors,
+.team-website {
+  font-size: 16px;
+  margin: 5px 0;
+  color: #aaa;
+}
+
+.team-website a {
+  color: #3498db;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.team-website a:hover {
+  color: #1e87dc;
 }
 
 .category-title {
-  font-size: 20px;
-  margin-bottom: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 15px;
   color: #333;
 }
 
 .player-cards {
   display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
   margin-top: 20px;
 }
 
 .player-card {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 15px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s;
-  height: 150px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: transform 0.3s, box-shadow 0.3s;
   cursor: pointer;
 }
 
 .player-card:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 .player-name {
-  font-size: 16px;
-  margin-top: 10px;
-  text-align: center;
+  font-size: 18px;
+  margin: 10px 0;
+  font-weight: bold;
 }
 
 .player-position,
 .player-nationality {
   font-size: 14px;
   color: #666;
+  margin: 5px 0;
 }
 
-.player-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
-  margin-top: 20px;
-}
+/* Additional Media Queries for Ultra-small Devices */
 
-@media (max-width: 768px) {
-  .player-cards {
-    grid-template-columns: repeat(auto-fill, minmax(33%, 1fr));
+@media (max-width: 360px) {
+  .team-name {
+    font-size: 28px;
   }
-}
 
-@media (max-width: 480px) {
-  .player-cards {
-    grid-template-columns: 1fr;
+  .player-card {
+    padding: 15px;
+  }
+
+  .player-name {
+    font-size: 16px;
+  }
+
+  .player-position,
+  .player-nationality {
+    font-size: 12px;
   }
 }
 </style>

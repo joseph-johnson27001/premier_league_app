@@ -27,21 +27,21 @@ body {
   padding: 0;
 }
 #app {
-  font-family: Arial, sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 .background {
-  background-color: #f2f2f2; /* Change to your desired background color */
+  background-color: #f2f2f2;
   display: flex;
   justify-content: center;
   min-height: 100vh;
 }
 
 .content-container {
-  background-color: white; /* Change to your desired content background color */
+  background-color: white;
   max-width: 1200px;
   width: 100%;
   padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 </style>

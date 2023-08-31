@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <div v-if="isLoading" class="loading-indicator">
+    <p>Loading...</p>
+  </div>
+  <div v-else>
     <h1 class="page-title">TEAMS</h1>
     <div class="team-cards">
       <router-link
@@ -28,7 +31,7 @@ export default {
     return {
       teams: [],
       selectedTeamId: this.$route.params.teamId,
-      players: [],
+      isLoading: true,
     };
   },
   methods: {
@@ -38,16 +41,9 @@ export default {
         this.teams = response.data.teams.sort((a, b) => {
           return a.name.localeCompare(b.name); // Sort alphabetically
         });
+        this.isLoading = false; // Data is loaded, set loading state to false
       } catch (error) {
         console.error("Error fetching teams:", error);
-      }
-    },
-    async fetchTeamPlayers(teamId) {
-      try {
-        const response = await axios.get(`/api/teams/${teamId}`);
-        this.players = response.data.squad;
-      } catch (error) {
-        console.error("Error fetching team players:", error);
       }
     },
   },
@@ -58,6 +54,14 @@ export default {
 </script>
 
 <style scoped>
+.loading-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150px; /* Adjust height as needed */
+  font-size: 18px;
+  color: #666;
+}
 .page-title {
   font-size: 24px;
   margin-bottom: 20px;

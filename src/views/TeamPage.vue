@@ -1,9 +1,9 @@
 <template>
-  <div class="team-page">
-    <div v-if="isLoading" class="loading-indicator">
-      <p>Loading...</p>
-    </div>
-    <div class="team-header" v-else>
+  <div v-if="isLoading" class="loading-indicator">
+    <p>Loading...</p>
+  </div>
+  <div class="team-page" v-else>
+    <div class="team-header">
       <img :src="selectedTeam.crest" :alt="selectedTeam.name + ' Crest'" />
       <div class="team-info">
         <h1 class="team-name">{{ selectedTeam.name }}</h1>
@@ -156,6 +156,7 @@ export default {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s;
   height: 150px;
+  cursor: pointer;
 }
 
 .player-card:hover {

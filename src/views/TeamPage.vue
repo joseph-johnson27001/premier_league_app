@@ -1,33 +1,42 @@
 <template>
-  <div>
-    <h1 class="page-title">{{ selectedTeam.name }}</h1>
-    <div class="team-details">
-      <div class="team-logo">
-        <img :src="selectedTeam.crest" :alt="selectedTeam.name + ' Crest'" />
-      </div>
+  <div class="team-page">
+    <div class="team-header">
+      <img :src="selectedTeam.crest" :alt="selectedTeam.name + ' Crest'" />
       <div class="team-info">
-        <p><strong>Full Name:</strong> {{ selectedTeam.name }}</p>
-        <p><strong>Short Name:</strong> {{ selectedTeam.shortName }}</p>
-        <p><strong>Founded:</strong> {{ selectedTeam.founded }}</p>
-        <p><strong>Club Colors:</strong> {{ selectedTeam.clubColors }}</p>
-        <p>
-          <strong>Website: </strong>
+        <h1 class="team-name">{{ selectedTeam.name }}</h1>
+        <p class="team-manager">
+          Manager: {{ selectedTeam.coach.name }} ({{
+            selectedTeam.coach.nationality
+          }})
+        </p>
+        <p class="team-founded">Founded: {{ selectedTeam.founded }}</p>
+        <p class="team-club-colors">
+          Club Colors: {{ selectedTeam.clubColors }}
+        </p>
+        <p class="team-website">
+          Website:
           <a :href="selectedTeam.website" target="_blank">{{
             selectedTeam.website
           }}</a>
         </p>
       </div>
     </div>
-
     <h2 class="section-title">Players</h2>
-    <ul class="player-list">
-      <li v-for="player in selectedTeam.squad" :key="player.id">
-        {{ player.name }} ({{ player.position }}) - {{ player.nationality }}
-      </li>
-    </ul>
-
-    <h2 class="section-title">Manager</h2>
-    <p>{{ selectedTeam.coach.name }} ({{ selectedTeam.coach.nationality }})</p>
+    <div class="player-categories">
+      <div v-for="(players, category) in categorizedPlayers" :key="category">
+        <h3 class="category-title">{{ getCategoryTitle(category) }}</h3>
+        <div class="player-cards">
+          <div class="player-card" v-for="player in players" :key="player.id">
+            <div class="player-card-header">
+              <!-- <img :src="getPlayerImage(player)" :alt="player.name" /> -->
+              <h4 class="player-name">{{ player.name }}</h4>
+            </div>
+            <p class="player-position">{{ player.position }}</p>
+            <p class="player-nationality">{{ player.nationality }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -38,10 +47,49 @@ export default {
   data() {
     return {
       selectedTeamId: this.$route.params.teamId,
-      selectedTeam: {}, // Store the selected team's data
+      selectedTeam: {},
     };
   },
+  computed: {
+    categorizedPlayers() {
+      const categorizedPlayers = {
+        Goalkeeper: [],
+        Defender: [],
+        Midfielder: [],
+        Forward: [],
+      };
+
+      this.selectedTeam.squad.forEach((player) => {
+        const position = player.position ? player.position.toLowerCase() : "";
+        if (position.includes("goalkeeper")) {
+          categorizedPlayers.Goalkeeper.push(player);
+        } else if (position.includes("defence")) {
+          categorizedPlayers.Defender.push(player);
+        } else if (position.includes("midfield")) {
+          categorizedPlayers.Midfielder.push(player);
+        } else if (position.includes("offence")) {
+          categorizedPlayers.Forward.push(player);
+        }
+      });
+
+      return categorizedPlayers;
+    },
+  },
   methods: {
+    getCategoryTitle(category) {
+      switch (category) {
+        case "Goalkeeper":
+          return "Goalkeepers";
+        case "Defender":
+          return "Defenders";
+        case "Midfielder":
+          return "Midfielders";
+        case "Forward":
+          return "Forwards";
+        default:
+          return category;
+      }
+    },
     async fetchTeamDetails() {
       try {
         const response = await axios.get(`/api/teams/${this.selectedTeamId}`);
@@ -89,13 +137,60 @@ export default {
   color: #333;
 }
 
-.player-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.player-categories {
+  margin-top: 20px;
 }
 
-.player-list li {
-  margin-bottom: 5px;
+.category-title {
+  font-size: 16px;
+  margin-top: 10px;
+  color: #666;
+  text-transform: uppercase;
+}
+
+.player-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.player-card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.player-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.player-card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.player-card-header img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.player-name {
+  font-size: 16px;
+  color: #333;
+}
+
+.player-position,
+.player-nationality {
+  font-size: 14px;
+  color: #666;
 }
 </style>

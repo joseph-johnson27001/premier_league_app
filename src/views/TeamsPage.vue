@@ -1,26 +1,22 @@
 <template>
   <div>
-    <h1>Teams</h1>
+    <h1 class="page-title">TEAMS</h1>
     <div class="team-cards">
-      <div
+      <router-link
         v-for="team in teams"
         :key="team.id"
-        class="team-card"
-        @click="fetchTeamPlayers(team.id)"
+        :to="{ name: 'Team', params: { teamId: team.id } }"
       >
-        <img :src="team.crest" :alt="team.name" class="team-crest" />
-        <p class="team-name">{{ team.name }}</p>
-      </div>
+        <div class="team-card">
+          <img
+            :src="team.crest"
+            :alt="team.name + ' Crest'"
+            class="team-crest"
+          />
+          <p class="team-name">{{ team.name }}</p>
+        </div>
+      </router-link>
     </div>
-    <ul v-if="players.length">
-      <li v-for="player in players" :key="player.id">
-        <router-link
-          :to="{ name: 'player-profile', params: { id: player.id } }"
-        >
-          {{ player.name }}
-        </router-link>
-      </li>
-    </ul>
   </div>
 </template>
 
@@ -65,7 +61,11 @@ export default {
 </script>
 
 <style scoped>
-/* Add your styles here */
+.page-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
 .team-cards {
   display: grid;
   grid-template-columns: repeat(

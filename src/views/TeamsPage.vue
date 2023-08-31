@@ -39,10 +39,9 @@ export default {
     async fetchTeams() {
       try {
         const response = await axios.get("/api/competitions/PL/teams");
-        this.teams = response.data.teams.map((team) => ({
-          ...team,
-          crest: team.crest, // Use the 'crest' property directly
-        }));
+        this.teams = response.data.teams.sort((a, b) => {
+          return a.name.localeCompare(b.name); // Sort alphabetically
+        });
       } catch (error) {
         console.error("Error fetching teams:", error);
       }
@@ -68,9 +67,13 @@ export default {
 <style scoped>
 /* Add your styles here */
 .team-cards {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(200px, 1fr)
+  ); /* Responsive grid */
   gap: 20px;
+  justify-content: center; /* Center the cards horizontally */
 }
 
 .team-card {
@@ -96,5 +99,15 @@ export default {
 .team-name {
   margin-top: 10px;
   text-align: center;
+}
+
+/* Media query for adjusting columns on smaller screens */
+@media (max-width: 768px) {
+  .team-cards {
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(150px, 1fr)
+    ); /* Adjust column width */
+  }
 }
 </style>

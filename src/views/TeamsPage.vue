@@ -44,9 +44,9 @@ export default {
       const response = await axios.get("/api/competitions/PL/teams");
       console.log(response);
       this.teams = response.data.teams.sort((a, b) => {
-        return a.name.localeCompare(b.name); // Sort alphabetically
+        return a.name.localeCompare(b.name);
       });
-      this.isLoading = false; // Data is loaded, set loading state to false
+      this.isLoading = false;
     } catch (error) {
       console.error("Error fetching teams:", error);
     }
@@ -84,8 +84,8 @@ export default {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  max-height: 250px; /* Set a maximum height for the cards */
-  overflow: hidden; /* Hide overflow content if the card becomes taller */
+  max-height: 250px;
+  overflow: hidden;
   transition: transform 0.3s, box-shadow 0.3s;
   cursor: pointer;
   text-align: center;
@@ -113,9 +113,9 @@ export default {
   font-weight: bold;
   margin-top: 10px;
   color: #333;
-  white-space: nowrap; /* Prevent team name from wrapping */
-  overflow: hidden; /* Hide overflow content if the name is too long */
-  text-overflow: ellipsis; /* Show ellipsis (...) for truncated text */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .team-card-founded {
@@ -136,8 +136,6 @@ export default {
 .team-card-link:hover {
   color: #1e87dc;
 }
-
-/* Additional Media Queries for Ultra-small Devices */
 
 @media (max-width: 360px) {
   .team-name {

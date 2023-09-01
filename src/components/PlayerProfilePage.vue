@@ -28,8 +28,6 @@
               {{ player.currentTeam.contract.until }}
             </p>
           </div>
-
-          <!-- Include the rest of the player's information here -->
           <div class="recent-matches">
             <h2>Recent Matches</h2>
             <div v-for="match in matches" :key="match.id" class="match">
@@ -64,7 +62,6 @@
                   }})
                 </p>
               </div>
-              <!-- Display more match statistics and team information here -->
             </div>
           </div>
         </div>
@@ -82,12 +79,12 @@ export default {
     return {
       player: {},
       loading: true,
-      matches: [], // Add this array to store the player's match history
+      matches: [],
     };
   },
   async created() {
     await this.fetchPlayerProfile();
-    await this.fetchPlayerMatches(); // Fetch the match history after fetching player profile
+    await this.fetchPlayerMatches();
     this.loading = false;
   },
   methods: {
@@ -105,7 +102,7 @@ export default {
       const playerId = this.$route.params.id;
       try {
         const response = await axios.get(`/api/persons/${playerId}/matches`);
-        this.matches = response.data.matches; // Store the match history in the 'matches' array
+        this.matches = response.data.matches;
         console.log(this.matches);
       } catch (error) {
         console.error("Error fetching player matches:", error);

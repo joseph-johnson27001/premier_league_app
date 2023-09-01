@@ -57,16 +57,13 @@ export default {
   methods: {
     async fetchTeamsAndFixtures() {
       try {
-        const teamsResponse = await axios.get(
-          "/api/competitions/PL/teams" // Use the appropriate API endpoint for teams
-        );
+        const teamsResponse = await axios.get("/api/competitions/PL/teams");
         this.teams = teamsResponse.data.teams.map((team) => team.name);
 
         const fixturesResponse = await axios.get(
-          "/api/competitions/PL/matches" // Use the appropriate API endpoint for fixtures
+          "/api/competitions/PL/matches"
         );
 
-        // Filter upcoming fixtures based on the current date
         const currentDate = new Date();
         this.fixtures = fixturesResponse.data.matches.filter(
           (fixture) => new Date(fixture.utcDate) > currentDate

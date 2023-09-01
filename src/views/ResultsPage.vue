@@ -123,11 +123,11 @@ export default {
 }
 
 .score-container {
-  flex: 1; /* Take up available space to push the score to the center */
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px; /* Adjust the font size of the score */
+  font-size: 18px;
 }
 
 .team-left {

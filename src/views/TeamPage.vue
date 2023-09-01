@@ -101,7 +101,7 @@ export default {
       try {
         const response = await axios.get(`/api/teams/${this.selectedTeamId}`);
         this.selectedTeam = response.data;
-        this.isLoading = false; // Data is loaded, set loading state to false
+        this.isLoading = false;
       } catch (error) {
         console.error("Error fetching team details:", error);
       }
@@ -214,11 +214,9 @@ export default {
 .player-name,
 .player-position,
 .player-nationality {
-  color: #333; /* Adjust the color as needed */
-  /* Add any other desired styling here */
+  color: #333;
 }
 
-/* Style for link text */
 .team-website a,
 .player-link {
   color: #3498db;
@@ -230,8 +228,6 @@ export default {
 .player-link:hover {
   color: #1e87dc;
 }
-
-/* Additional Media Queries for Ultra-small Devices */
 
 @media (max-width: 360px) {
   .team-name {

@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import axios from "axios"; // Import axios
+import axios from "axios";
 
 export default {
   data() {

@@ -27,7 +27,7 @@ const routes = [
   {
     path: "/teams/:teamId",
     name: "Team",
-    component: TeamPage, // Use the TeamPage component here
+    component: TeamPage,
   },
 ];
 

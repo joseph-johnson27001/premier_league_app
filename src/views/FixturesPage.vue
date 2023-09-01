@@ -16,12 +16,11 @@
         :key="fixture.id"
         class="fixture-item"
       >
-        <span class="team-name">{{ fixture.homeTeam.name }}</span>
-        <span class="vs">vs</span>
-        <span class="team-name">{{ fixture.awayTeam.name }}</span>
-        <!-- <span class="date">{{
-          new Date(fixture.utcDate).toLocaleString()
-        }}</span> -->
+        <div class="team-name team-left">{{ fixture.homeTeam.name }}</div>
+        <div class="vs-container">
+          <span class="vs">vs</span>
+        </div>
+        <div class="team-name team-right">{{ fixture.awayTeam.name }}</div>
       </div>
     </div>
   </div>
@@ -122,7 +121,35 @@ export default {
   width: 80%;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+}
+
+.team-left {
+  flex: 1;
+  text-align: left;
+}
+.team-right {
+  flex: 1;
+  text-align: right;
+}
+
+.vs-container {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 10px;
+  width: 40px;
+}
+
+.middle-container {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.team-container {
+  display: flex;
   align-items: center;
 }
 

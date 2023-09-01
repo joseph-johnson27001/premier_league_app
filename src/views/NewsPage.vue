@@ -1,6 +1,9 @@
 <template>
   <div class="news-page">
-    <h1 class="page-title">NEWS</h1>
+    <div class="news-header">
+      <h1 class="news-name">Premier League News</h1>
+    </div>
+    <!-- Apply the shared class here -->
     <div class="news-list">
       <div v-for="story in sportsNews" :key="story.id" class="news-item">
         <img :src="story.image" alt="News Image" class="news-image" />
@@ -43,6 +46,17 @@ export default {
 </script>
 
 <style scoped>
+.news-header {
+  background-color: #333;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  margin: -20px -20px 20px -20px;
+}
 .page-title {
   font-size: 24px;
   margin-bottom: 20px;

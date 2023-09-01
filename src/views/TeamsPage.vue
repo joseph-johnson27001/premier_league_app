@@ -72,19 +72,6 @@ export default {
   margin: -20px -20px 20px -20px;
 }
 
-.league-logo {
-  width: 100px;
-  height: 100px;
-  margin-left: 20px;
-}
-
-.league-name {
-  font-family: "Montserrat", sans-serif;
-  font-size: 32px;
-  font-weight: bold;
-  margin: 0;
-}
-
 .team-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));

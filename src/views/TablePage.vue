@@ -1,6 +1,8 @@
 <template>
   <div>
-    <h1>Premier League Standings</h1>
+    <div class="table-header">
+      <h1 class="table-name">Premier League Standings</h1>
+    </div>
     <table class="team-table">
       <thead>
         <tr>
@@ -69,6 +71,17 @@ export default {
 </script>
 
 <style scoped>
+.table-header {
+  background-color: #333;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  margin: -20px -20px 20px -20px;
+}
 .clickable-row {
   cursor: pointer;
 }

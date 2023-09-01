@@ -16,16 +16,13 @@
         :key="result.id"
         class="result-item"
       >
-        <span class="team-name">{{ result.homeTeam.name }}</span>
-        <span class="score" v-if="result.status === 'FINISHED'">
-          {{ result.score.fullTime.home }} -
-          {{ result.score.fullTime.away }}
-        </span>
-        <span class="vs" v-else-if="result.status === 'SCHEDULED'">vs</span>
-        <span class="team-name">{{ result.awayTeam.name }}</span>
-        <!-- <span class="date">{{
-          new Date(result.utcDate).toLocaleString()
-        }}</span> -->
+        <div class="team-name team-left">{{ result.homeTeam.name }}</div>
+        <div class="score-container">
+          <span class="score" v-if="result.status === 'FINISHED'">
+            {{ result.score.fullTime.home }} - {{ result.score.fullTime.away }}
+          </span>
+        </div>
+        <div class="team-name team-right">{{ result.awayTeam.name }}</div>
       </div>
     </div>
   </div>
@@ -122,6 +119,28 @@ export default {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+.score-container {
+  flex: 1; /* Take up available space to push the score to the center */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px; /* Adjust the font size of the score */
+}
+
+.team-left {
+  flex: 1;
+  text-align: left;
+}
+.team-right {
+  flex: 1;
+  text-align: right;
+}
+
+.team-name {
+  font-weight: bold;
 }
 
 .team-name {

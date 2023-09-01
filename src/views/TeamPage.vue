@@ -4,7 +4,11 @@
   </div>
   <div class="team-page" v-else>
     <div class="team-header">
-      <img :src="selectedTeam.crest" :alt="selectedTeam.name + ' Crest'" />
+      <img
+        :src="selectedTeam.crest"
+        :alt="selectedTeam.name + ' Crest'"
+        style="margin-right: 10px"
+      />
       <div class="team-info">
         <h1 class="team-name">{{ selectedTeam.name }}</h1>
         <p class="team-manager">
@@ -123,7 +127,7 @@ export default {
   align-items: center;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   margin: -20px -20px 20px -20px;
 }
 

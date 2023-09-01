@@ -3,13 +3,8 @@
     <p>Loading...</p>
   </div>
   <div class="all-teams-page" v-else>
-    <div class="league-header">
-      <h1 class="league-name">Premier League Teams</h1>
-      <img
-        src="https://crests.football-data.org/PL.png"
-        alt="Premier League Crest"
-        class="league-logo"
-      />
+    <div class="teams-header">
+      <h1 class="teams-name">Premier League Teams</h1>
     </div>
     <div class="team-list">
       <router-link
@@ -63,10 +58,9 @@ export default {
 .all-teams-page {
   font-family: "Arial", sans-serif;
   background-color: #f5f5f5;
-  padding: 20px;
 }
 
-.league-header {
+.teams-header {
   background-color: #333;
   color: white;
   display: flex;

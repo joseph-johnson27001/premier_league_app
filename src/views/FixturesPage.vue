@@ -1,7 +1,7 @@
 <template>
   <div class="fixtures-page">
     <div class="fixtures-header">
-      <h1 class="fixtures-name">Premier League Teams</h1>
+      <h1 class="fixtures-name">Premier League Fixtures</h1>
     </div>
     <div class="team-dropdown">
       <label for="team">Select Team:</label>

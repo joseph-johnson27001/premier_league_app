@@ -1,6 +1,8 @@
 <template>
   <div class="results-page">
-    <h1 class="page-title">RESULTS</h1>
+    <div class="results-header">
+      <h1 class="results-name">Premier League Results</h1>
+    </div>
     <div class="team-dropdown">
       <label for="team">Select Team:</label>
       <select id="team" v-model="selectedTeam" @change="updateSelectedTeam">
@@ -85,6 +87,16 @@ export default {
 </script>
 
 <style scoped>
+.results-header {
+  background-color: #333;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin: -20px -20px 20px -20px;
+}
 .page-title {
   font-size: 24px;
   margin-bottom: 20px;

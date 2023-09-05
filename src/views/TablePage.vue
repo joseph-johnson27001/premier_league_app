@@ -16,7 +16,7 @@
           <th>GA</th>
           <th>GD</th>
           <th>Pts</th>
-          <th>Last 6</th>
+          <!-- <th>Last 6</th> -->
         </tr>
       </thead>
       <tbody>
@@ -28,7 +28,14 @@
           class="clickable-row"
         >
           <td>{{ index + 1 }}</td>
-          <td>{{ team.team.name }}</td>
+          <td style="display: flex; align-items: center">
+            <img
+              :src="team.team.crest"
+              :alt="team.team.name"
+              class="team-crest"
+            />
+            {{ team.team.name }}
+          </td>
           <td>{{ team.playedGames }}</td>
           <td>{{ team.won }}</td>
           <td>{{ team.draw }}</td>
@@ -37,7 +44,7 @@
           <td>{{ team.goalsAgainst }}</td>
           <td>{{ team.goalDifference }}</td>
           <td>{{ team.points }}</td>
-          <td>{{ team.form }}</td>
+          <!-- <td>{{ team.form }}</td> -->
         </router-link>
       </tbody>
     </table>
@@ -57,6 +64,9 @@ export default {
     this.fetchPremierLeagueStandings();
   },
   methods: {
+    getTeamCrestHTML(crestUrl, teamName) {
+      return `<img src="${crestUrl}" alt="${teamName}" class="team-crest">${teamName}`;
+    },
     async fetchPremierLeagueStandings() {
       try {
         const response = await axios.get("/api/competitions/PL/standings");
@@ -71,12 +81,16 @@ export default {
 </script>
 
 <style scoped>
+.team-crest {
+  margin-right: 10px;
+  max-height: 35px;
+}
 .table-header {
   background-color: #333;
   color: white;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: left;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
@@ -101,7 +115,7 @@ export default {
 .team-table td {
   padding: 10px;
   border-bottom: 1px solid #ddd;
-  text-align: center;
+  text-align: left;
 }
 
 .team-table th {
@@ -114,7 +128,6 @@ export default {
   background-color: #f2f2f2;
 }
 
-/* Additional styles for table cells */
 .team-name {
   font-weight: bold;
 }

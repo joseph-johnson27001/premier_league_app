@@ -158,7 +158,11 @@ export default {
 
 .score {
   font-size: 18px;
-  text-align: center; /* Center the score within its column */
+  text-align: center;
+}
+
+.score-container {
+  text-align: center;
 }
 
 .team-crest {

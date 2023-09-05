@@ -131,7 +131,7 @@ export default {
   width: 80%;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: grid;
-  grid-template-columns: 4fr 1fr 4fr;
+  grid-template-columns: 5fr 1fr 5fr;
   align-items: center;
 }
 
@@ -155,8 +155,6 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 10px;
-  width: 40px;
 }
 
 .team-name {
@@ -164,8 +162,16 @@ export default {
 }
 
 .vs {
+  display: flex;
+  justify-content: center;
   font-size: 18px;
-  margin: 0 10px;
+  text-align: center;
+}
+
+.vs-container {
+  display: flex;
+  justify-content: center;
+  text-align: center;
 }
 
 .team-crest {

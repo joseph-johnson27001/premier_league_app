@@ -113,15 +113,6 @@ export default {
   margin: -20px -20px 20px -20px;
 }
 
-.team-info {
-  flex: 1;
-}
-.page-title {
-  font-size: 24px;
-  margin-bottom: 20px;
-  color: #333;
-}
-
 .team-dropdown {
   margin-bottom: 20px;
 }
@@ -179,10 +170,6 @@ export default {
 .vs {
   font-size: 18px;
   margin: 0 10px;
-}
-
-.date {
-  color: #888;
 }
 
 .team-crest {

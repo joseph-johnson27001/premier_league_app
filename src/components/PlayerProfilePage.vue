@@ -157,8 +157,6 @@ export default {
   color: #333;
 }
 
-/* Additional Media Queries for Ultra-small Devices */
-
 @media (max-width: 360px) {
   .team-name {
     font-size: 28px;

@@ -19,6 +19,7 @@
         v-for="result in filteredResults"
         :key="result.id"
         class="fixture-item"
+        @click="selectMatch(result.id)"
       >
         <div class="team-container team-left">
           <img
@@ -57,6 +58,8 @@ export default {
       teams: [],
       results: [],
       teamCrests: {},
+      selectedMatchId: null,
+      selectedMatchData: null,
     };
   },
   created() {
@@ -99,6 +102,18 @@ export default {
     },
     getTeamCrest(teamName) {
       return this.teamCrests[teamName] || "";
+    },
+    selectMatch(matchId) {
+      this.selectedMatchId = matchId;
+      axios
+        .get(`/api/matches/${matchId}`)
+        .then((response) => {
+          this.selectedMatchData = response.data;
+          console.log(this.selectedMatchData);
+        })
+        .catch((error) => {
+          console.error("Error fetching match details:", error);
+        });
     },
   },
 };

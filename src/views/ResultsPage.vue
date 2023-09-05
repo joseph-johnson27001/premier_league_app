@@ -16,21 +16,21 @@
         :key="result.id"
         class="fixture-item"
       >
-        <div class="team-container">
+        <div class="team-container team-left">
           <img
             :src="getTeamCrest(result.homeTeam.name)"
             :alt="result.homeTeam.name"
             class="team-crest"
           />
-          <div class="team-name team-left">{{ result.homeTeam.name }}</div>
+          <div class="team-name">{{ result.homeTeam.name }}</div>
         </div>
         <div class="score-container">
           <span class="score" v-if="result.status === 'FINISHED'">
             {{ result.score.fullTime.home }} - {{ result.score.fullTime.away }}
           </span>
         </div>
-        <div class="team-container">
-          <div class="team-name team-right">{{ result.awayTeam.name }}</div>
+        <div class="team-container team-right">
+          <div class="team-name">{{ result.awayTeam.name }}</div>
           <img
             :src="getTeamCrest(result.awayTeam.name)"
             :alt="result.awayTeam.name"
@@ -132,32 +132,24 @@ export default {
   margin: 10px 0;
   width: 80%;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 4fr 1fr 4fr;
   align-items: center;
-}
-
-.team-left {
-  flex: 1;
-  text-align: left;
-}
-.team-right {
-  flex: 1;
-  text-align: right;
-}
-
-.score-container {
-  flex: 0 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 10px;
-  width: 60px;
 }
 
 .team-container {
   display: flex;
   align-items: center;
+}
+
+.team-left {
+  text-align: left;
+}
+
+.team-right {
+  display: flex;
+  text-align: right;
+  justify-content: flex-end;
 }
 
 .team-name {
@@ -166,7 +158,7 @@ export default {
 
 .score {
   font-size: 18px;
-  margin: 0 10px;
+  text-align: center; /* Center the score within its column */
 }
 
 .team-crest {

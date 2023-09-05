@@ -16,11 +16,25 @@
         :key="fixture.id"
         class="fixture-item"
       >
-        <div class="team-name team-left">{{ fixture.homeTeam.name }}</div>
+        <div class="team-container">
+          <img
+            :src="getTeamCrest(fixture.homeTeam.name)"
+            :alt="fixture.homeTeam.name"
+            class="team-crest"
+          />
+          <div class="team-name team-left">{{ fixture.homeTeam.name }}</div>
+        </div>
         <div class="vs-container">
           <span class="vs">vs</span>
         </div>
-        <div class="team-name team-right">{{ fixture.awayTeam.name }}</div>
+        <div class="team-container">
+          <div class="team-name team-right">{{ fixture.awayTeam.name }}</div>
+          <img
+            :src="getTeamCrest(fixture.awayTeam.name)"
+            :alt="fixture.awayTeam.name"
+            class="team-crest"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -36,6 +50,8 @@ export default {
       selectedTeam: "",
       teams: [],
       fixtures: [],
+      // Store team crests URLs in a map
+      teamCrests: {},
     };
   },
   created() {
@@ -59,11 +75,14 @@ export default {
       try {
         const teamsResponse = await axios.get("/api/competitions/PL/teams");
         this.teams = teamsResponse.data.teams.map((team) => team.name);
+        this.teamCrests = teamsResponse.data.teams.reduce((crestMap, team) => {
+          crestMap[team.name] = team.crest;
+          return crestMap;
+        }, {});
 
         const fixturesResponse = await axios.get(
           "/api/competitions/PL/matches"
         );
-
         const currentDate = new Date();
         this.fixtures = fixturesResponse.data.matches.filter(
           (fixture) => new Date(fixture.utcDate) > currentDate
@@ -74,6 +93,9 @@ export default {
     },
     updateSelectedTeam(event) {
       this.selectedTeam = event.target.value;
+    },
+    getTeamCrest(teamName) {
+      return this.teamCrests[teamName] || "";
     },
   },
 };
@@ -163,7 +185,11 @@ export default {
   color: #888;
 }
 
-/* Style for selected team in dropdown */
+.team-crest {
+  max-width: 30px;
+  margin: 10px;
+}
+
 option[selected] {
   font-weight: bold;
 }

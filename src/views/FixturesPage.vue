@@ -16,19 +16,19 @@
         :key="fixture.id"
         class="fixture-item"
       >
-        <div class="team-container">
+        <div class="team-container team-left">
           <img
             :src="getTeamCrest(fixture.homeTeam.name)"
             :alt="fixture.homeTeam.name"
             class="team-crest"
           />
-          <div class="team-name team-left">{{ fixture.homeTeam.name }}</div>
+          <div class="team-name">{{ fixture.homeTeam.name }}</div>
         </div>
         <div class="vs-container">
           <span class="vs">vs</span>
         </div>
-        <div class="team-container">
-          <div class="team-name team-right">{{ fixture.awayTeam.name }}</div>
+        <div class="team-container team-right">
+          <div class="team-name">{{ fixture.awayTeam.name }}</div>
           <img
             :src="getTeamCrest(fixture.awayTeam.name)"
             :alt="fixture.awayTeam.name"
@@ -130,18 +130,24 @@ export default {
   margin: 10px 0;
   width: 80%;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: grid;
+  grid-template-columns: 4fr 1fr 4fr;
+  align-items: center;
+}
+
+.team-container {
   display: flex;
-  justify-content: center;
   align-items: center;
 }
 
 .team-left {
-  flex: 1;
   text-align: left;
 }
+
 .team-right {
-  flex: 1;
+  display: flex;
   text-align: right;
+  justify-content: flex-end;
 }
 
 .vs-container {
@@ -151,16 +157,6 @@ export default {
   justify-content: center;
   margin: 0 10px;
   width: 40px;
-}
-
-.middle-container {
-  flex-grow: 1;
-  text-align: center;
-}
-
-.team-container {
-  display: flex;
-  align-items: center;
 }
 
 .team-name {

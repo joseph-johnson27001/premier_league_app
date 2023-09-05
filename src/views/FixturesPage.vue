@@ -3,12 +3,17 @@
     <div class="fixtures-header">
       <h1 class="fixtures-name">Premier League Fixtures</h1>
     </div>
-    <div class="team-dropdown">
-      <label for="team">Select Team:</label>
-      <select id="team" v-model="selectedTeam" @change="updateSelectedTeam">
-        <option value="">All Teams</option>
-        <option v-for="team in teams" :key="team">{{ team }}</option>
-      </select>
+    <div class="team-selection">
+      <div class="team-radio" v-for="team in teams" :key="team">
+        <input
+          type="checkbox"
+          :id="team"
+          :value="team"
+          v-model="selectedTeams"
+          @change="updateSelectedTeams"
+        />
+        <label :for="team">{{ team }}</label>
+      </div>
     </div>
     <div class="fixtures-list">
       <div
@@ -47,7 +52,7 @@ export default {
   name: "FixturesPage",
   data() {
     return {
-      selectedTeam: "",
+      selectedTeams: [],
       teams: [],
       fixtures: [],
       // Store team crests URLs in a map
@@ -59,13 +64,13 @@ export default {
   },
   computed: {
     filteredFixtures() {
-      if (this.selectedTeam === "") {
+      if (this.selectedTeams.length === 0) {
         return this.fixtures;
       } else {
         return this.fixtures.filter(
           (fixture) =>
-            fixture.homeTeam.name === this.selectedTeam ||
-            fixture.awayTeam.name === this.selectedTeam
+            this.selectedTeams.includes(fixture.homeTeam.name) ||
+            this.selectedTeams.includes(fixture.awayTeam.name)
         );
       }
     },
@@ -74,7 +79,8 @@ export default {
     async fetchTeamsAndFixtures() {
       try {
         const teamsResponse = await axios.get("/api/competitions/PL/teams");
-        this.teams = teamsResponse.data.teams.map((team) => team.name);
+        this.teams = teamsResponse.data.teams.map((team) => team.name).sort();
+        console.log(teamsResponse);
         this.teamCrests = teamsResponse.data.teams.reduce((crestMap, team) => {
           crestMap[team.name] = team.crest;
           return crestMap;
@@ -91,9 +97,6 @@ export default {
         console.error("Error fetching teams and fixtures:", error);
       }
     },
-    updateSelectedTeam(event) {
-      this.selectedTeam = event.target.value;
-    },
     getTeamCrest(teamName) {
       return this.teamCrests[teamName] || "";
     },
@@ -102,6 +105,36 @@ export default {
 </script>
 
 <style scoped>
+.team-selection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.team-radio input[type="checkbox"] {
+  display: none;
+}
+
+.team-radio label {
+  display: inline-block;
+  background-color: #f8f8f8;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.team-radio label:hover {
+  background-color: #ddd;
+}
+
+.team-radio input[type="checkbox"]:checked + label {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
 .fixtures-header {
   background-color: #333;
   color: white;
@@ -111,10 +144,6 @@ export default {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   margin: -20px -20px 20px -20px;
-}
-
-.team-dropdown {
-  margin-bottom: 20px;
 }
 
 .fixtures-list {

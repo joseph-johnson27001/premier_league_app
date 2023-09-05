@@ -10,7 +10,6 @@
           :id="team"
           :value="team"
           v-model="selectedTeams"
-          @change="updateSelectedTeams"
         />
         <label :for="team">{{ team }}</label>
       </div>
@@ -93,6 +92,7 @@ export default {
         this.results = resultsResponse.data.matches.filter(
           (result) => new Date(result.utcDate) <= currentDate
         );
+        console.log(this.results);
       } catch (error) {
         console.error("Error fetching teams and results:", error);
       }

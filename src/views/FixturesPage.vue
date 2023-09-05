@@ -10,7 +10,6 @@
           :id="team"
           :value="team"
           v-model="selectedTeams"
-          @change="updateSelectedTeams"
         />
         <label :for="team">{{ team }}</label>
       </div>

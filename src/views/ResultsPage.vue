@@ -57,7 +57,6 @@ export default {
       selectedTeams: [],
       teams: [],
       results: [],
-      // Store team crests URLs in a map
       teamCrests: {},
     };
   },
@@ -81,9 +80,7 @@ export default {
     async fetchTeamsAndResults() {
       try {
         const teamsResponse = await axios.get("/api/competitions/PL/teams");
-        // Sort the teams alphabetically
         this.teams = teamsResponse.data.teams.map((team) => team.name).sort();
-
         this.teamCrests = teamsResponse.data.teams.reduce((crestMap, team) => {
           crestMap[team.name] = team.crest;
           return crestMap;
@@ -99,9 +96,6 @@ export default {
       } catch (error) {
         console.error("Error fetching teams and results:", error);
       }
-    },
-    updateSelectedTeams() {
-      // No need to update selectedTeam since it's an array now.
     },
     getTeamCrest(teamName) {
       return this.teamCrests[teamName] || "";

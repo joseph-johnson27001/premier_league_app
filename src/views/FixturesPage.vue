@@ -55,7 +55,6 @@ export default {
       selectedTeams: [],
       teams: [],
       fixtures: [],
-      // Store team crests URLs in a map
       teamCrests: {},
     };
   },

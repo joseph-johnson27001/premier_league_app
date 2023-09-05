@@ -3,12 +3,17 @@
     <div class="fixtures-header">
       <h1 class="fixtures-name">Premier League Results</h1>
     </div>
-    <div class="team-dropdown">
-      <label for="team">Select Team:</label>
-      <select id="team" v-model="selectedTeam" @change="updateSelectedTeam">
-        <option value="">All Teams</option>
-        <option v-for="team in teams" :key="team">{{ team }}</option>
-      </select>
+    <div class="team-selection">
+      <div class="team-radio" v-for="team in teams" :key="team">
+        <input
+          type="checkbox"
+          :id="team"
+          :value="team"
+          v-model="selectedTeams"
+          @change="updateSelectedTeams"
+        />
+        <label :for="team">{{ team }}</label>
+      </div>
     </div>
     <div class="fixtures-list">
       <div
@@ -49,9 +54,11 @@ export default {
   name: "ResultsPage",
   data() {
     return {
-      selectedTeam: "",
+      selectedTeams: [],
       teams: [],
       results: [],
+      // Store team crests URLs in a map
+      teamCrests: {},
     };
   },
   created() {
@@ -59,13 +66,13 @@ export default {
   },
   computed: {
     filteredResults() {
-      if (this.selectedTeam === "") {
+      if (this.selectedTeams.length === 0) {
         return this.results;
       } else {
         return this.results.filter(
           (result) =>
-            result.homeTeam.name === this.selectedTeam ||
-            result.awayTeam.name === this.selectedTeam
+            this.selectedTeams.includes(result.homeTeam.name) ||
+            this.selectedTeams.includes(result.awayTeam.name)
         );
       }
     },
@@ -74,7 +81,9 @@ export default {
     async fetchTeamsAndResults() {
       try {
         const teamsResponse = await axios.get("/api/competitions/PL/teams");
-        this.teams = teamsResponse.data.teams.map((team) => team.name);
+        // Sort the teams alphabetically
+        this.teams = teamsResponse.data.teams.map((team) => team.name).sort();
+
         this.teamCrests = teamsResponse.data.teams.reduce((crestMap, team) => {
           crestMap[team.name] = team.crest;
           return crestMap;
@@ -83,8 +92,6 @@ export default {
         const resultsResponse = await axios.get(
           "/api/competitions/PL/matches?status=FINISHED"
         );
-        console.log(resultsResponse);
-
         const currentDate = new Date();
         this.results = resultsResponse.data.matches.filter(
           (result) => new Date(result.utcDate) <= currentDate
@@ -93,8 +100,8 @@ export default {
         console.error("Error fetching teams and results:", error);
       }
     },
-    updateSelectedTeam(event) {
-      this.selectedTeam = event.target.value;
+    updateSelectedTeams() {
+      // No need to update selectedTeam since it's an array now.
     },
     getTeamCrest(teamName) {
       return this.teamCrests[teamName] || "";
@@ -115,8 +122,35 @@ export default {
   margin: -20px -20px 20px -20px;
 }
 
-.team-dropdown {
+.team-selection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
   margin-bottom: 20px;
+}
+
+.team-radio input[type="checkbox"] {
+  display: none;
+}
+
+.team-radio label {
+  display: inline-block;
+  background-color: #f8f8f8;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.team-radio label:hover {
+  background-color: #ddd;
+}
+
+.team-radio input[type="checkbox"]:checked + label {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
 }
 
 .fixtures-list {

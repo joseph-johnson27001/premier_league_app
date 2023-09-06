@@ -19,7 +19,7 @@
         v-for="result in filteredResults"
         :key="result.id"
         class="fixture-item"
-        @click="selectMatch(result.id)"
+        @click="toggleFixtureDetails(result.id)"
       >
         <div class="team-container team-left">
           <img
@@ -41,6 +41,15 @@
             :alt="result.awayTeam.name"
             class="team-crest"
           />
+        </div>
+        <!-- Add a section to display fixture details -->
+        <div class="fixture-details" v-if="selectedMatchId === result.id">
+          <h2>Match Details</h2>
+          <div v-if="selectedMatchData">
+            <div>Home Team: {{ selectedMatchData.homeTeam }}</div>
+            <div>Away Team: {{ selectedMatchData.awayTeam }}</div>
+            <!-- Display more details here based on your API response -->
+          </div>
         </div>
       </div>
     </div>
@@ -103,17 +112,24 @@ export default {
     getTeamCrest(teamName) {
       return this.teamCrests[teamName] || "";
     },
-    selectMatch(matchId) {
-      this.selectedMatchId = matchId;
-      axios
-        .get(`/api/matches/${matchId}`)
-        .then((response) => {
-          this.selectedMatchData = response.data;
-          console.log(this.selectedMatchData);
-        })
-        .catch((error) => {
-          console.error("Error fetching match details:", error);
-        });
+    toggleFixtureDetails(matchId) {
+      if (this.selectedMatchId === matchId) {
+        this.selectedMatchId = null;
+        this.selectedMatchData = null;
+      } else {
+        this.selectedMatchId = matchId;
+        // You can fetch and populate the data for this fixture here
+        // using an API call as you did before
+        axios
+          .get(`/api/matches/${matchId}`)
+          .then((response) => {
+            this.selectedMatchData = response.data;
+            console.log(this.selectedMatchData);
+          })
+          .catch((error) => {
+            console.error("Error fetching match details:", error);
+          });
+      }
     },
   },
 };
@@ -178,6 +194,15 @@ export default {
   display: grid;
   grid-template-columns: 4fr 1fr 4fr;
   align-items: center;
+  cursor: pointer;
+}
+
+.fixture-details {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
 }
 
 .team-container {

@@ -43,11 +43,42 @@
           />
         </div>
         <div class="fixture-details" v-if="isSelected(result.id)">
-          <h2>Match Details</h2>
-          <div v-if="selectedMatchData[result.id]">
-            <div>Home Team: {{ selectedMatchData[result.id].homeTeam }}</div>
-            <div>Away Team: {{ selectedMatchData[result.id].awayTeam }}</div>
-            <!-- Display more details here based on your API response -->
+          <h2 class="match-details-title">Match Details</h2>
+          <div
+            v-if="selectedMatchData[result.id]"
+            class="match-details-content"
+          >
+            <div class="score-details">
+              <div class="score-item">
+                Half Time Score:
+                {{ selectedMatchData[result.id].score.halfTime.home }} -
+                {{ selectedMatchData[result.id].score.halfTime.away }}
+              </div>
+              <div class="score-item">
+                Full Time Score:
+                {{ selectedMatchData[result.id].score.fullTime.home }} -
+                {{ selectedMatchData[result.id].score.fullTime.away }}
+              </div>
+            </div>
+            <div class="info-details">
+              <div class="info-item">
+                Referee: {{ selectedMatchData[result.id].referees[0].name }}
+              </div>
+              <div class="info-item">
+                Venue: {{ selectedMatchData[result.id].venue }}
+              </div>
+              <div class="info-item">
+                Matchday: {{ selectedMatchData[result.id].matchday }}
+              </div>
+            </div>
+            <div class="competition-details">
+              <div class="competition-emblem">
+                <img
+                  :src="selectedMatchData[result.id].competition.emblem"
+                  alt="Competition Emblem"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -112,12 +143,12 @@ export default {
     },
     toggleFixtureDetails(matchId) {
       if (this.isSelected(matchId)) {
-        this.$delete(this.selectedMatchData, matchId); // Remove fixture data
+        this.$delete(this.selectedMatchData, matchId);
       } else {
         axios
           .get(`/api/matches/${matchId}`)
           .then((response) => {
-            this.$set(this.selectedMatchData, matchId, response.data); // Add fixture data
+            this.$set(this.selectedMatchData, matchId, response.data);
             console.log(this.selectedMatchData);
           })
           .catch((error) => {
@@ -126,7 +157,7 @@ export default {
       }
     },
     isSelected(matchId) {
-      return !!this.selectedMatchData[matchId]; // Check if fixture data exists
+      return !!this.selectedMatchData[matchId];
     },
   },
 };
@@ -195,11 +226,49 @@ export default {
 }
 
 .fixture-details {
-  margin-top: 20px;
-  padding: 10px;
+  background-color: #f8f8f8;
   border: 1px solid #ccc;
   border-radius: 4px;
-  background-color: #f8f8f8;
+  padding: 20px;
+  margin-top: 20px;
+  grid-column: span 3;
+  background-color: white !important;
+  position: relative;
+  cursor: default;
+}
+
+.competition-emblem {
+  position: absolute;
+  top: 0px;
+  right: 5px;
+  z-index: 1;
+}
+
+.match-details-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.match-details-content {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.score-details,
+.info-details,
+.competition-details {
+  flex: 1;
+  padding: 10px;
+}
+
+.score-item,
+.info-item {
+  margin-bottom: 10px;
+}
+
+.competition-emblem img {
+  max-width: 100px;
 }
 
 .team-container {

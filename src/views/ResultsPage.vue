@@ -42,12 +42,11 @@
             class="team-crest"
           />
         </div>
-        <!-- Add a section to display fixture details -->
-        <div class="fixture-details" v-if="selectedMatchId === result.id">
+        <div class="fixture-details" v-if="isSelected(result.id)">
           <h2>Match Details</h2>
-          <div v-if="selectedMatchData">
-            <div>Home Team: {{ selectedMatchData.homeTeam }}</div>
-            <div>Away Team: {{ selectedMatchData.awayTeam }}</div>
+          <div v-if="selectedMatchData[result.id]">
+            <div>Home Team: {{ selectedMatchData[result.id].homeTeam }}</div>
+            <div>Away Team: {{ selectedMatchData[result.id].awayTeam }}</div>
             <!-- Display more details here based on your API response -->
           </div>
         </div>
@@ -67,8 +66,7 @@ export default {
       teams: [],
       results: [],
       teamCrests: {},
-      selectedMatchId: null,
-      selectedMatchData: null,
+      selectedMatchData: {}, // Store fixture data in an object with fixture IDs as keys
     };
   },
   created() {
@@ -113,17 +111,13 @@ export default {
       return this.teamCrests[teamName] || "";
     },
     toggleFixtureDetails(matchId) {
-      if (this.selectedMatchId === matchId) {
-        this.selectedMatchId = null;
-        this.selectedMatchData = null;
+      if (this.isSelected(matchId)) {
+        this.$delete(this.selectedMatchData, matchId); // Remove fixture data
       } else {
-        this.selectedMatchId = matchId;
-        // You can fetch and populate the data for this fixture here
-        // using an API call as you did before
         axios
           .get(`/api/matches/${matchId}`)
           .then((response) => {
-            this.selectedMatchData = response.data;
+            this.$set(this.selectedMatchData, matchId, response.data); // Add fixture data
             console.log(this.selectedMatchData);
           })
           .catch((error) => {
@@ -131,9 +125,120 @@ export default {
           });
       }
     },
+    isSelected(matchId) {
+      return !!this.selectedMatchData[matchId]; // Check if fixture data exists
+    },
   },
 };
 </script>
+
+<style scoped>
+.fixtures-header {
+  background-color: #333;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin: -20px -20px 20px -20px;
+}
+
+.team-selection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.team-radio input[type="checkbox"] {
+  display: none;
+}
+
+.team-radio label {
+  display: inline-block;
+  background-color: #f8f8f8;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.team-radio label:hover {
+  background-color: #ddd;
+}
+
+.team-radio input[type="checkbox"]:checked + label {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.fixtures-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fixture-item {
+  background-color: #f8f8f8;
+  padding: 10px;
+  border-radius: 4px;
+  margin: 10px 0;
+  width: 80%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: grid;
+  grid-template-columns: 4fr 1fr 4fr;
+  align-items: center;
+  cursor: pointer;
+}
+
+.fixture-details {
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+}
+
+.team-container {
+  display: flex;
+  align-items: center;
+}
+
+.team-left {
+  text-align: left;
+}
+
+.team-right {
+  display: flex;
+  text-align: right;
+  justify-content: flex-end;
+}
+
+.team-name {
+  font-weight: bold;
+}
+
+.score {
+  font-size: 18px;
+  text-align: center;
+}
+
+.score-container {
+  text-align: center;
+}
+
+.team-crest {
+  max-width: 30px;
+  margin: 10px;
+}
+
+option[selected] {
+  font-weight: bold;
+}
+</style>
 
 <style scoped>
 .fixtures-header {

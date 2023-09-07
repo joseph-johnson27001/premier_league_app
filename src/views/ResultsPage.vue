@@ -4,14 +4,16 @@
       <h1 class="fixtures-name">Premier League Results</h1>
     </div>
     <div class="team-selection">
-      <div class="team-radio" v-for="team in teams" :key="team">
-        <input
-          type="checkbox"
-          :id="team"
-          :value="team"
-          v-model="selectedTeams"
-        />
-        <label :for="team">{{ team }}</label>
+      <div class="team-radio-grid">
+        <div class="team-radio" v-for="team in teams" :key="team">
+          <input
+            type="checkbox"
+            :id="team"
+            :value="team"
+            v-model="selectedTeams"
+          />
+          <label :for="team">{{ team }}</label>
+        </div>
       </div>
     </div>
     <div class="fixtures-list">
@@ -43,11 +45,31 @@
           />
         </div>
         <div class="fixture-details" v-if="isSelected(result.id)">
-          <h2 class="match-details-title">Match Details</h2>
+          <div class="match-details-header">
+            <h2 class="match-details-title">Match Details</h2>
+            <div class="competition-emblem">
+              <img
+                :src="selectedMatchData[result.id].competition.emblem"
+                alt="Competition Emblem"
+              />
+            </div>
+          </div>
+
           <div
             v-if="selectedMatchData[result.id]"
             class="match-details-content"
           >
+            <div class="info-details">
+              <div class="info-item">
+                Venue: {{ selectedMatchData[result.id].venue }}
+              </div>
+              <div class="info-item">
+                Referee: {{ selectedMatchData[result.id].referees[0].name }}
+              </div>
+              <div class="info-item">
+                Matchday: {{ selectedMatchData[result.id].matchday }}
+              </div>
+            </div>
             <div class="score-details">
               <div class="score-item">
                 Half Time Score:
@@ -58,25 +80,6 @@
                 Full Time Score:
                 {{ selectedMatchData[result.id].score.fullTime.home }} -
                 {{ selectedMatchData[result.id].score.fullTime.away }}
-              </div>
-            </div>
-            <div class="info-details">
-              <div class="info-item">
-                Referee: {{ selectedMatchData[result.id].referees[0].name }}
-              </div>
-              <div class="info-item">
-                Venue: {{ selectedMatchData[result.id].venue }}
-              </div>
-              <div class="info-item">
-                Matchday: {{ selectedMatchData[result.id].matchday }}
-              </div>
-            </div>
-            <div class="competition-details">
-              <div class="competition-emblem">
-                <img
-                  :src="selectedMatchData[result.id].competition.emblem"
-                  alt="Competition Emblem"
-                />
               </div>
             </div>
           </div>
@@ -230,24 +233,27 @@ export default {
   border: 1px solid #ccc;
   border-radius: 4px;
   padding: 20px;
-  margin-top: 20px;
+  margin-top: 0px;
   grid-column: span 3;
   background-color: white !important;
   position: relative;
   cursor: default;
 }
 
-.competition-emblem {
-  position: absolute;
-  top: 0px;
-  right: 5px;
-  z-index: 1;
+.match-details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Optional: align items vertically in the header */
 }
 
 .match-details-title {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 10px;
+}
+
+.competition-emblem img {
+  max-width: 100px;
 }
 
 .match-details-content {
@@ -260,6 +266,7 @@ export default {
 .competition-details {
   flex: 1;
   padding: 10px;
+  margin-top: auto;
 }
 
 .score-item,
@@ -328,18 +335,33 @@ option[selected] {
   margin-bottom: 20px;
 }
 
-.team-radio input[type="checkbox"] {
-  display: none;
+.team-radio-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* Create 5 columns */
+  gap: 10px; /* Adjust the gap between buttons as needed */
 }
 
-.team-radio label {
-  display: inline-block;
-  background-color: #f8f8f8;
+.team-radio {
   padding: 8px 12px;
-  border: 1px solid #ccc;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.2s, color 0.2s;
+  width: 100%; /* Make each button fill the grid cell */
+  box-sizing: border-box; /* Include padding in width calculation */
+  text-align: center; /* Center the label text */
+}
+
+.team-radio label {
+  display: block; /* Make labels full width */
+  height: 40px; /* Set a fixed height for all labels */
+  line-height: 40px; /* Center text vertically within the label */
+  overflow: hidden; /* Hide text overflow if necessary */
+  white-space: nowrap; /* Prevent text from wrapping */
+  text-overflow: ellipsis; /* Show ellipsis for long text */
+}
+
+.team-radio input[type="checkbox"] {
+  display: none;
 }
 
 .team-radio label:hover {

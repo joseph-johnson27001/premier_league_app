@@ -337,8 +337,8 @@ option[selected] {
 
 .team-radio-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr); /* Create 5 columns */
-  gap: 10px; /* Adjust the gap between buttons as needed */
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
 }
 
 .team-radio {
@@ -346,18 +346,18 @@ option[selected] {
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.2s, color 0.2s;
-  width: 100%; /* Make each button fill the grid cell */
-  box-sizing: border-box; /* Include padding in width calculation */
-  text-align: center; /* Center the label text */
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
 }
 
 .team-radio label {
-  display: block; /* Make labels full width */
-  height: 40px; /* Set a fixed height for all labels */
-  line-height: 40px; /* Center text vertically within the label */
-  overflow: hidden; /* Hide text overflow if necessary */
-  white-space: nowrap; /* Prevent text from wrapping */
-  text-overflow: ellipsis; /* Show ellipsis for long text */
+  display: block;
+  height: 40px;
+  line-height: 40px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .team-radio input[type="checkbox"] {

@@ -1,8 +1,5 @@
 <template>
   <div class="fixtures-page">
-    <div class="fixtures-header">
-      <h1 class="fixtures-name">Premier League Fixtures</h1>
-    </div>
     <div class="team-selection">
       <div class="team-radio" v-for="team in teams" :key="team">
         <input
@@ -55,6 +52,7 @@ export default {
       teams: [],
       fixtures: [],
       teamCrests: {},
+      teamSelectionVisible: false,
     };
   },
   created() {
@@ -78,7 +76,6 @@ export default {
       try {
         const teamsResponse = await axios.get("/api/competitions/PL/teams");
         this.teams = teamsResponse.data.teams.map((team) => team.name).sort();
-        console.log(teamsResponse);
         this.teamCrests = teamsResponse.data.teams.reduce((crestMap, team) => {
           crestMap[team.name] = team.crest;
           return crestMap;
@@ -98,139 +95,122 @@ export default {
     getTeamCrest(teamName) {
       return this.teamCrests[teamName] || "";
     },
+    toggleTeamSelection() {
+      this.teamSelectionVisible = !this.teamSelectionVisible;
+    },
   },
 };
 </script>
 
 <style scoped>
-.fixtures-page {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-.fixtures-header {
-  text-align: center;
-}
-
-.fixtures-name {
-  font-size: 24px;
-  margin: 0;
-}
-
 .team-selection {
-  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.team-radio-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
 }
 
 .team-radio {
-  margin-bottom: 8px;
-}
-
-/* Updated Styles for Checkboxes */
-.team-checkbox {
-  display: inline-block;
-  position: relative;
-  padding-left: 28px;
-  margin-right: 10px;
+  padding: 8px 12px;
+  border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
 }
 
-.team-checkbox input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
+.team-radio label {
+  display: block;
+  height: 40px;
+  line-height: 40px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
-.checkmark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 20px;
-  width: 20px;
-  background-color: #eee;
-  border: 1px solid #ccc;
-}
-
-.team-checkbox:hover input ~ .checkmark {
-  background-color: #ccc;
-}
-
-.team-checkbox input:checked ~ .checkmark {
-  background-color: #2196f3;
-}
-
-.checkmark:after {
-  content: "";
-  position: absolute;
+.team-radio input[type="checkbox"] {
   display: none;
 }
 
-.team-checkbox input:checked ~ .checkmark:after {
-  display: block;
+.team-radio label:hover {
+  background-color: #ddd;
 }
 
-.team-checkbox .checkmark:after {
-  left: 7px;
-  top: 3px;
-  width: 6px;
-  height: 12px;
-  border: solid white;
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
+.team-radio input[type="checkbox"]:checked + label {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
 }
-
-/* End of Updated Styles for Checkboxes */
-
-.fixtures-list {
-  margin-top: 20px;
-}
-
-.fixture-item {
+.fixtures-header {
+  background-color: #333;
+  color: white;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin: -20px -20px 20px -20px;
+}
+.fixtures-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.fixture-item {
+  background-color: #f8f8f8;
   padding: 10px;
-  margin-bottom: 10px;
+  border-radius: 4px;
+  margin: 10px 0;
+  width: 80%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: grid;
+  grid-template-columns: 5fr 1fr 5fr;
+  align-items: center;
+}
+
+.team-left {
+  text-align: left;
+}
+.team-right {
+  display: flex;
+  text-align: right;
+  justify-content: flex-end;
 }
 
 .team-container {
   display: flex;
   align-items: center;
 }
-
-.team-left {
-  justify-content: flex-start;
-}
-
-.team-right {
-  justify-content: flex-end;
-}
-
-.team-crest {
-  width: 32px;
-  height: 32px;
-  margin-right: 8px;
-  margin-left: 8px;
-}
-
-.team-name {
-  font-size: 16px;
-}
-
 .vs-container {
-  font-size: 20px;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.team-name {
   font-weight: bold;
 }
-
-@media (max-width: 576px) {
-  .team-crest {
-    width: 24px;
-    height: 24px;
-  }
-
-  .team-name {
-    font-size: 14px;
-  }
+.vs {
+  display: flex;
+  justify-content: center;
+  font-size: 18px;
+  text-align: center;
+}
+.vs-container {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+.team-crest {
+  max-width: 30px;
+  margin: 10px;
+}
+option[selected] {
+  font-weight: bold;
 }
 </style>

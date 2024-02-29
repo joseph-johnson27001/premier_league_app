@@ -1,8 +1,5 @@
 <template>
   <div class="results-page">
-    <div class="fixtures-header">
-      <h1 class="fixtures-name">Premier League Results</h1>
-    </div>
     <div class="team-selection">
       <div class="team-radio-grid">
         <div class="team-radio" v-for="team in teams" :key="team">
@@ -167,21 +164,9 @@ export default {
 </script>
 
 <style scoped>
-.fixtures-header {
-  background-color: #333;
-  color: white;
-  display: flex;
-  align-items: center;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  margin: -20px -20px 20px -20px;
-}
-
 .team-selection {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
   margin-bottom: 20px;
 }
 
@@ -331,14 +316,12 @@ option[selected] {
 .team-selection {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
   margin-bottom: 20px;
 }
 
 .team-radio-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 10px;
 }
 
 .team-radio {

@@ -39,9 +39,9 @@ body {
 
 .content-container {
   background-color: white;
+  border: 1px solid #ccc;
   max-width: 1200px;
   width: 100%;
   padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 </style>

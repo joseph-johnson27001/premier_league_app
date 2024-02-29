@@ -1,6 +1,7 @@
 <template>
   <div class="fixtures-page">
-    <div class="team-selection">
+    <h1 class="table-name">Fixtures</h1>
+    <!-- <div class="team-selection">
       <div class="team-radio" v-for="team in teams" :key="team">
         <input
           type="checkbox"
@@ -10,7 +11,7 @@
         />
         <label :for="team">{{ team }}</label>
       </div>
-    </div>
+    </div> -->
     <div class="fixtures-list">
       <div
         v-for="fixture in filteredFixtures"
@@ -103,6 +104,9 @@ export default {
 </script>
 
 <style scoped>
+.table-name {
+  font-size: 24px;
+}
 .team-selection {
   display: flex;
   flex-wrap: wrap;
@@ -146,6 +150,7 @@ export default {
   color: white;
   border-color: #007bff;
 }
+
 .fixtures-header {
   background-color: #333;
   color: white;
@@ -156,17 +161,19 @@ export default {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   margin: -20px -20px 20px -20px;
 }
+
 .fixtures-list {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 .fixture-item {
   background-color: #f8f8f8;
   padding: 10px;
   border-radius: 4px;
   margin: 10px 0;
-  width: 80%;
+  width: 90%;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: grid;
   grid-template-columns: 5fr 1fr 5fr;
@@ -176,6 +183,7 @@ export default {
 .team-left {
   text-align: left;
 }
+
 .team-right {
   display: flex;
   text-align: right;
@@ -186,30 +194,36 @@ export default {
   display: flex;
   align-items: center;
 }
+
 .vs-container {
   flex: 0 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .team-name {
   font-weight: bold;
 }
+
 .vs {
   display: flex;
   justify-content: center;
   font-size: 18px;
   text-align: center;
 }
+
 .vs-container {
   display: flex;
   justify-content: center;
   text-align: center;
 }
+
 .team-crest {
   max-width: 30px;
   margin: 10px;
 }
+
 option[selected] {
   font-weight: bold;
 }

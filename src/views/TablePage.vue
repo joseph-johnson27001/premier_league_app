@@ -1,8 +1,6 @@
 <template>
   <div>
-    <div class="table-header">
-      <h1 class="table-name">Premier League Standings</h1>
-    </div>
+    <h1 class="table-name">Premier League Standings</h1>
     <table class="team-table">
       <thead>
         <tr>
@@ -81,14 +79,12 @@ export default {
 </script>
 
 <style scoped>
-/* Table Styles */
 .table-header {
   text-align: center;
   margin-bottom: 20px;
 }
 .table-name {
   font-size: 24px;
-  margin: 0;
 }
 .team-table {
   width: 100%;

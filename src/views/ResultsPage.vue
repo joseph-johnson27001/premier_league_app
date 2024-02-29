@@ -1,6 +1,7 @@
 <template>
   <div class="results-page">
-    <div class="team-selection">
+    <h1 class="table-name">Results</h1>
+    <!-- <div class="team-selection">
       <div class="team-radio-grid">
         <div class="team-radio" v-for="team in teams" :key="team">
           <input
@@ -12,7 +13,7 @@
           <label :for="team">{{ team }}</label>
         </div>
       </div>
-    </div>
+    </div> -->
     <div class="fixtures-list">
       <div
         v-for="result in filteredResults"
@@ -164,6 +165,9 @@ export default {
 </script>
 
 <style scoped>
+.table-name {
+  font-size: 24px;
+}
 .team-selection {
   display: flex;
   flex-wrap: wrap;
@@ -204,9 +208,9 @@ export default {
   background-color: #f8f8f8;
   padding: 10px;
   border-radius: 4px;
+  border: 1px solid #ccc;
   margin: 10px 0;
-  width: 80%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 90%;
   display: grid;
   grid-template-columns: 4fr 1fr 4fr;
   align-items: center;
@@ -228,7 +232,7 @@ export default {
 .match-details-header {
   display: flex;
   justify-content: space-between;
-  align-items: center; /* Optional: align items vertically in the header */
+  align-items: center;
 }
 
 .match-details-title {
@@ -261,128 +265,6 @@ export default {
 
 .competition-emblem img {
   max-width: 100px;
-}
-
-.team-container {
-  display: flex;
-  align-items: center;
-}
-
-.team-left {
-  text-align: left;
-}
-
-.team-right {
-  display: flex;
-  text-align: right;
-  justify-content: flex-end;
-}
-
-.team-name {
-  font-weight: bold;
-}
-
-.score {
-  font-size: 18px;
-  text-align: center;
-}
-
-.score-container {
-  text-align: center;
-}
-
-.team-crest {
-  max-width: 30px;
-  margin: 10px;
-}
-
-option[selected] {
-  font-weight: bold;
-}
-</style>
-
-<style scoped>
-.fixtures-header {
-  background-color: #333;
-  color: white;
-  display: flex;
-  align-items: center;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  margin: -20px -20px 20px -20px;
-}
-
-.team-selection {
-  display: flex;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
-}
-
-.team-radio-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-}
-
-.team-radio {
-  padding: 8px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.2s, color 0.2s;
-  width: 100%;
-  box-sizing: border-box;
-  text-align: center;
-}
-
-.team-radio label {
-  display: block;
-  height: 40px;
-  line-height: 40px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.team-radio input[type="checkbox"] {
-  display: none;
-}
-
-.team-radio label:hover {
-  background-color: #ddd;
-}
-
-.team-radio input[type="checkbox"]:checked + label {
-  background-color: #007bff;
-  color: white;
-  border-color: #007bff;
-}
-
-.fixtures-list {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex-direction: column-reverse;
-}
-
-.fixture-item {
-  background-color: #f8f8f8;
-  padding: 10px;
-  border-radius: 4px;
-  margin: 10px 0;
-  width: 80%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  display: grid;
-  grid-template-columns: 4fr 1fr 4fr;
-  align-items: center;
-  cursor: pointer;
-}
-
-.fixture-details {
-  margin-top: 20px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #f8f8f8;
 }
 
 .team-container {

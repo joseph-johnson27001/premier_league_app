@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1 class="table-name">Premier League Standings</h1>
     <table class="team-table">
       <thead>
         <tr>
@@ -94,6 +93,7 @@ export default {
 .team-table td {
   border: 1px solid #ddd;
   padding: 8px;
+  text-align: center;
 }
 .team-table th {
   background-color: #f2f2f2;

@@ -1,50 +1,38 @@
 <template>
   <nav class="navigation-bar">
     <div class="navigation-container">
-      <router-link to="/" class="nav-link" id="home-button"> Home </router-link>
-      <router-link to="/table" class="nav-link"> Table </router-link>
-      <router-link to="/fixtures" class="nav-link"> Fixtures </router-link>
-      <router-link to="/results" class="nav-link"> Results </router-link>
-      <router-link to="/teams" class="nav-link"> Teams </router-link>
-      <router-link to="/news" class="nav-link"> News </router-link>
+      <router-link to="/table" class="nav-link">Table</router-link>
+      <router-link to="/fixtures" class="nav-link">Fixtures</router-link>
+      <router-link to="/results" class="nav-link">Results</router-link>
+      <router-link to="/teams" class="nav-link">Teams</router-link>
+      <router-link to="/news" class="nav-link">News</router-link>
     </div>
   </nav>
 </template>
 
-<script>
-export default {
-  methods: {
-    isRouteActive(route) {
-      return this.$route.path === route;
-    },
-  },
-};
-</script>
-
 <style scoped>
 .navigation-bar {
-  display: flex;
-  background-color: #004080;
+  background-color: #333;
+  color: #fff;
   padding: 10px 0;
-  justify-content: center;
 }
 
 .navigation-container {
-  width: 1200px;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .nav-link {
-  color: white;
+  color: #fff;
   text-decoration: none;
-  margin: 0 15px;
+  padding: 8px 12px;
   transition: color 0.3s;
 }
 
 .nav-link:hover {
-  color: #ffd700;
-}
-
-.active-link {
-  color: #ffd700;
+  color: #ffd700; /* Change to desired hover color */
 }
 </style>

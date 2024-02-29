@@ -1,7 +1,5 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-
-import HomePage from "@/views/HomePage.vue";
 import TablePage from "@/views/TablePage.vue";
 import FixturesPage from "@/views/FixturesPage.vue";
 import ResultsPage from "@/views/ResultsPage.vue";
@@ -13,7 +11,7 @@ import NewsPage from "@/views/NewsPage.vue";
 Vue.use(VueRouter);
 
 const routes = [
-  { path: "/", component: HomePage },
+  { path: "/", redirect: "/table" }, // Redirect / to /table
   { path: "/table", component: TablePage },
   { path: "/fixtures", component: FixturesPage },
   { path: "/results", component: ResultsPage },
@@ -36,7 +34,6 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  // Scroll to the top of the page
   window.scrollTo(0, 0);
   next();
 });

@@ -27,7 +27,7 @@ body {
   padding: 0;
 }
 #app {
-  font-family: "Roboto", sans-serif;
+  font-family: "Montserrat";
 }
 
 .background {

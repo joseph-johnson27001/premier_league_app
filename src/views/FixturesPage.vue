@@ -103,63 +103,95 @@ export default {
 </script>
 
 <style scoped>
-.team-selection {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 20px;
+.fixtures-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-.team-radio input[type="checkbox"] {
+.fixtures-header {
+  text-align: center;
+}
+
+.fixtures-name {
+  font-size: 24px;
+  margin: 0;
+}
+
+.team-selection {
+  margin-top: 20px;
+}
+
+.team-radio {
+  margin-bottom: 8px;
+}
+
+/* Updated Styles for Checkboxes */
+.team-checkbox {
+  display: inline-block;
+  position: relative;
+  padding-left: 28px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.team-checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+  border: 1px solid #ccc;
+}
+
+.team-checkbox:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+.team-checkbox input:checked ~ .checkmark {
+  background-color: #2196f3;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
   display: none;
 }
 
-.team-radio label {
-  display: inline-block;
-  background-color: #f8f8f8;
-  padding: 8px 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.2s, color 0.2s;
+.team-checkbox input:checked ~ .checkmark:after {
+  display: block;
 }
 
-.team-radio label:hover {
-  background-color: #ddd;
+.team-checkbox .checkmark:after {
+  left: 7px;
+  top: 3px;
+  width: 6px;
+  height: 12px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
 }
 
-.team-radio input[type="checkbox"]:checked + label {
-  background-color: #007bff;
-  color: white;
-  border-color: #007bff;
-}
-.fixtures-header {
-  background-color: #333;
-  color: white;
-  display: flex;
-  align-items: center;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  margin: -20px -20px 20px -20px;
-}
+/* End of Updated Styles for Checkboxes */
 
 .fixtures-list {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin-top: 20px;
 }
 
 .fixture-item {
-  background-color: #f8f8f8;
-  padding: 10px;
-  border-radius: 4px;
-  margin: 10px 0;
-  width: 80%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  display: grid;
-  grid-template-columns: 5fr 1fr 5fr;
+  display: flex;
   align-items: center;
+  justify-content: space-between;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
 }
 
 .team-container {
@@ -168,45 +200,37 @@ export default {
 }
 
 .team-left {
-  text-align: left;
+  justify-content: flex-start;
 }
 
 .team-right {
-  display: flex;
-  text-align: right;
   justify-content: flex-end;
 }
 
-.vs-container {
-  flex: 0 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.team-crest {
+  width: 32px;
+  height: 32px;
+  margin-right: 8px;
+  margin-left: 8px;
 }
 
 .team-name {
-  font-weight: bold;
-}
-
-.vs {
-  display: flex;
-  justify-content: center;
-  font-size: 18px;
-  text-align: center;
+  font-size: 16px;
 }
 
 .vs-container {
-  display: flex;
-  justify-content: center;
-  text-align: center;
-}
-
-.team-crest {
-  max-width: 30px;
-  margin: 10px;
-}
-
-option[selected] {
+  font-size: 20px;
   font-weight: bold;
+}
+
+@media (max-width: 576px) {
+  .team-crest {
+    width: 24px;
+    height: 24px;
+  }
+
+  .team-name {
+    font-size: 14px;
+  }
 }
 </style>

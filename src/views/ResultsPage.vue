@@ -361,6 +361,7 @@ option[selected] {
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex-direction: column-reverse;
 }
 
 .fixture-item {

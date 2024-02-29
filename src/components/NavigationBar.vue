@@ -1,11 +1,21 @@
 <template>
   <nav class="navigation-bar">
     <div class="navigation-container">
-      <router-link to="/table" class="nav-link">Table</router-link>
-      <router-link to="/fixtures" class="nav-link">Fixtures</router-link>
-      <router-link to="/results" class="nav-link">Results</router-link>
-      <router-link to="/teams" class="nav-link">Teams</router-link>
-      <router-link to="/news" class="nav-link">News</router-link>
+      <router-link to="/table" class="nav-link" active-class="active-link"
+        >Table</router-link
+      >
+      <router-link to="/fixtures" class="nav-link" active-class="active-link"
+        >Fixtures</router-link
+      >
+      <router-link to="/results" class="nav-link" active-class="active-link"
+        >Results</router-link
+      >
+      <router-link to="/teams" class="nav-link" active-class="active-link"
+        >Teams</router-link
+      >
+      <router-link to="/news" class="nav-link" active-class="active-link"
+        >News</router-link
+      >
     </div>
   </nav>
 </template>
@@ -33,6 +43,11 @@
 }
 
 .nav-link:hover {
-  color: #ffd700; /* Change to desired hover color */
+  color: #ffd700;
+}
+
+.active-link,
+.router-link-active .nav-link {
+  color: #ffd700;
 }
 </style>

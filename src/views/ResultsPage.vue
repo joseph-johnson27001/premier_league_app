@@ -14,7 +14,7 @@
             :alt="result.homeTeam.name"
             class="team-crest"
           />
-          <div class="team-name">{{ result.homeTeam.name }}</div>
+          <div class="team-name">{{ getTeamName(result.homeTeam.name) }}</div>
         </div>
         <div class="score-container">
           <span class="score" v-if="result.status === 'FINISHED'">
@@ -22,7 +22,7 @@
           </span>
         </div>
         <div class="team-container team-right">
-          <div class="team-name">{{ result.awayTeam.name }}</div>
+          <div class="team-name">{{ getTeamName(result.awayTeam.name) }}</div>
           <img
             :src="getTeamCrest(result.awayTeam.name)"
             :alt="result.awayTeam.name"
@@ -83,6 +83,10 @@ export default {
         console.error("Error fetching teams and results:", error);
       }
     },
+    getTeamName(teamName) {
+      return teamName.replace(/FC$/, "").trim();
+    },
+
     getTeamCrest(teamName) {
       return this.teamCrests[teamName] || "";
     },
@@ -145,11 +149,6 @@ export default {
   text-align: right;
   justify-content: flex-end;
 }
-
-.team-name {
-  font-weight: bold;
-}
-
 .score {
   font-size: 18px;
   text-align: center;

@@ -32,7 +32,7 @@
               :alt="team.team.name"
               class="team-crest"
             />
-            {{ team.team.name }}
+            {{ getTeamName(team.team.name) }}
           </td>
           <td>{{ team.playedGames }}</td>
           <td>{{ team.won }}</td>
@@ -64,6 +64,9 @@ export default {
   methods: {
     getTeamCrestHTML(crestUrl, teamName) {
       return `<img src="${crestUrl}" alt="${teamName}" class="team-crest">${teamName}`;
+    },
+    getTeamName(teamName) {
+      return teamName.replace(/FC$/, "").trim();
     },
     async fetchPremierLeagueStandings() {
       try {

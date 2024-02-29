@@ -14,16 +14,13 @@
           <th>GA</th>
           <th>GD</th>
           <th>Pts</th>
-          <!-- <th>Last 6</th> -->
         </tr>
       </thead>
       <tbody>
-        <router-link
+        <tr
           v-for="(team, index) in premierLeagueStandings"
           :key="team.team.id"
-          :to="{ name: 'Team', params: { teamId: team.team.id } }"
-          tag="tr"
-          class="clickable-row"
+          class="team-row"
         >
           <td>{{ index + 1 }}</td>
           <td style="display: flex; align-items: center">
@@ -42,8 +39,7 @@
           <td>{{ team.goalsAgainst }}</td>
           <td>{{ team.goalDifference }}</td>
           <td>{{ team.points }}</td>
-          <!-- <td>{{ team.form }}</td> -->
-        </router-link>
+        </tr>
       </tbody>
     </table>
   </div>
@@ -106,7 +102,7 @@ export default {
 .team-table tbody tr:nth-child(even) {
   background-color: #f9f9f9;
 }
-.clickable-row:hover {
+.team-row:hover {
   background-color: #f5f5f5;
 }
 .team-crest {

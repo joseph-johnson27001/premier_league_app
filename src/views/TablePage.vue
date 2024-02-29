@@ -81,62 +81,56 @@ export default {
 </script>
 
 <style scoped>
-.team-crest {
-  margin-right: 10px;
-  max-height: 35px;
-}
+/* Table Styles */
 .table-header {
-  background-color: #333;
-  color: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: left;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  margin: -20px -20px 20px -20px;
-}
-.clickable-row {
-  cursor: pointer;
-}
-.page-title {
-  font-size: 24px;
+  text-align: center;
   margin-bottom: 20px;
-  color: #333;
 }
-
+.table-name {
+  font-size: 24px;
+  margin: 0;
+}
 .team-table {
   width: 100%;
   border-collapse: collapse;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
 }
-
 .team-table th,
 .team-table td {
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-  text-align: left;
+  border: 1px solid #ddd;
+  padding: 8px;
 }
-
 .team-table th {
-  background-color: #f8f8f8;
-  color: #333;
-  font-weight: bold;
-}
-
-.team-table tr:hover {
   background-color: #f2f2f2;
+  color: #333;
 }
-
-.team-name {
-  font-weight: bold;
+.team-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
 }
-
-.negative {
-  color: #d9534f;
+.clickable-row:hover {
+  background-color: #f5f5f5;
 }
-
-.positive {
-  color: #5cb85c;
+.team-crest {
+  width: 24px;
+  height: auto;
+  margin-right: 8px;
+}
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .table-name {
+    font-size: 20px;
+  }
+  .team-table th,
+  .team-table td {
+    padding: 6px;
+  }
+}
+@media (max-width: 576px) {
+  .team-crest {
+    width: 20px;
+  }
+  .table-name {
+    font-size: 18px;
+  }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="results-page">
-    <h1 class="table-name">Results</h1>
+    <h2>Results</h2>
     <div class="fixtures-list">
       <div
         v-for="result in filteredResults"
@@ -112,10 +112,6 @@ export default {
 </script>
 
 <style scoped>
-.table-name {
-  font-size: 24px;
-}
-
 .fixtures-list {
   display: flex;
   flex-direction: column-reverse;
@@ -133,6 +129,12 @@ export default {
   grid-template-columns: 4fr 1fr 4fr;
   align-items: center;
   cursor: pointer;
+  transition: border-color 0.1s, box-shadow 0.1s;
+}
+
+.fixture-item:hover {
+  border-color: #999;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
 .team-container {

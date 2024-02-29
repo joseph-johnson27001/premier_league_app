@@ -200,7 +200,7 @@ export default {
 
 .fixtures-list {
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   align-items: center;
 }
 
@@ -210,7 +210,7 @@ export default {
   border-radius: 4px;
   border: 1px solid #ccc;
   margin: 10px 0;
-  width: 90%;
+  width: 100%;
   display: grid;
   grid-template-columns: 4fr 1fr 4fr;
   align-items: center;

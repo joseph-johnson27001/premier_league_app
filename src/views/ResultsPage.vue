@@ -1,5 +1,6 @@
 <template>
   <div class="results-page">
+    <h2>Results</h2>
     <div class="fixtures-list">
       <div
         v-for="result in filteredResults"
@@ -122,7 +123,7 @@ export default {
   background-color: #f8f8f8;
   padding: 10px;
   border-radius: 4px;
-  border: 1px solid #ccc;
+  border: 1px solid #999;
   margin: 10px 0;
   width: 100%;
   display: grid;
@@ -130,11 +131,12 @@ export default {
   align-items: center;
   cursor: pointer;
   transition: border-color 0.1s, box-shadow 0.1s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .fixture-item:hover {
-  border-color: #999;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  border-color: #1f8dd6;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
 .team-container {

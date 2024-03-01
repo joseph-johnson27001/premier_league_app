@@ -1,6 +1,5 @@
 <template>
   <div class="results-page">
-    <h2>Results</h2>
     <div class="fixtures-list">
       <div
         v-for="result in filteredResults"
@@ -116,6 +115,7 @@ export default {
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
+  font-weight: bold;
 }
 
 .fixture-item {

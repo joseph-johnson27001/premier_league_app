@@ -41,7 +41,6 @@
           </div>
           <div class="vs-sign">
             <p>vs</p>
-            <br />
             <div class="match-details">
               {{ formatDateTime(fixture.utcDate) }}
             </div>
@@ -109,12 +108,13 @@ export default {
       const options = {
         month: "short",
         day: "2-digit",
-        hour: "numeric",
-        minute: "numeric",
-        hour12: true,
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
       };
       return date.toLocaleString("en-US", options);
     },
+
     async fetchLatestMatchWeek() {
       this.isLoading = true;
       try {
@@ -187,7 +187,7 @@ export default {
 <style scoped>
 .fixtures-list {
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   align-items: center;
   font-weight: bold;
 }
@@ -238,6 +238,8 @@ export default {
 }
 
 .match-details {
+  display: flex;
+  justify-content: center;
   font-weight: 100;
 }
 

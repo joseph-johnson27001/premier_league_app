@@ -1,10 +1,7 @@
 <template>
   <div>
-    <h2>Fixtures</h2>
-    <div v-if="isLoading" class="animation-container">
-      <loadingAnimation />
-    </div>
-    <div v-else class="fixtures-page">
+    <span class="heading-span">
+      <h2>Fixtures</h2>
       <div class="matchday-dropdown">
         <label for="matchday-select">Select Match Week: </label>
         <select
@@ -21,7 +18,11 @@
           </option>
         </select>
       </div>
-
+    </span>
+    <div v-if="isLoading" class="animation-container">
+      <loadingAnimation />
+    </div>
+    <div v-else class="fixtures-page">
       <div class="fixtures-list">
         <div
           v-for="fixture in filteredFixtures"
@@ -185,6 +186,12 @@ export default {
 </script>
 
 <style scoped>
+.heading-span {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .fixtures-list {
   display: flex;
   flex-direction: column;
@@ -253,7 +260,6 @@ export default {
 }
 
 .matchday-dropdown {
-  margin-bottom: 20px;
   display: flex;
   justify-content: flex-end;
   align-items: center;

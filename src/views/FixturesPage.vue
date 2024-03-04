@@ -116,7 +116,7 @@ export default {
         this.matchdays = [
           ...new Set(this.fixtures.map((fixture) => fixture.matchday)),
         ];
-        this.selectedMatchday = Math.min(...this.matchdays);
+        this.selectedMatchday = this.matchdays[0];
         this.fetchMatchesByMatchday(this.selectedMatchday);
       } catch (error) {
         console.error("Error fetching teams and fixtures:", error);

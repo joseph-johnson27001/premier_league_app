@@ -4,7 +4,14 @@
     <div v-if="isLoading" class="animation-container">
       <loadingAnimation />
     </div>
-    <table v-else class="team-table">
+    <div v-if="!isLoading && this.premierLeagueStandings.length == 0">
+      The free API has hit its limit for 10 calls every minute. Please wait and
+      try again.
+    </div>
+    <table
+      v-if="!isLoading && this.premierLeagueStandings.length > 0"
+      class="team-table"
+    >
       <thead>
         <tr>
           <th>#</th>

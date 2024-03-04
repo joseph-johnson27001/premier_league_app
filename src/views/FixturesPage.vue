@@ -209,9 +209,9 @@ export default {
   text-align: right;
   justify-content: flex-end;
 }
-.score {
-  font-size: 18px;
-  text-align: center;
+.vs-sign {
+  display: flex;
+  justify-content: center;
 }
 
 .score-container {

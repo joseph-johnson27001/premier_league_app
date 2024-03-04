@@ -1,6 +1,7 @@
 <template>
   <div>
-    <table class="team-table">
+    <div v-if="isLoading">Loading...</div>
+    <table v-else class="team-table">
       <thead>
         <tr>
           <th>#</th>
@@ -51,6 +52,7 @@ export default {
   data() {
     return {
       premierLeagueStandings: [],
+      isLoading: true,
     };
   },
   created() {
@@ -64,6 +66,7 @@ export default {
       return teamName.replace(/FC$/, "").trim();
     },
     async fetchPremierLeagueStandings() {
+      this.isLoading = true;
       try {
         const response = await axios.get("/api/competitions/PL/standings");
         this.premierLeagueStandings = response.data.standings[0].table;
@@ -71,6 +74,7 @@ export default {
       } catch (error) {
         console.error("Error fetching Premier League standings:", error);
       }
+      this.isLoading = false;
     },
   },
 };

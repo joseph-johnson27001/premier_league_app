@@ -39,7 +39,13 @@
               {{ getTeamName(fixture.homeTeam.name) }}
             </div>
           </div>
-          <div class="vs-sign">vs</div>
+          <div class="vs-sign">
+            <p>vs</p>
+            <br />
+            <div class="match-details">
+              {{ formatDateTime(fixture.utcDate) }}
+            </div>
+          </div>
           <div class="team-container team-right">
             <div class="team-name">
               {{ getTeamName(fixture.awayTeam.name) }}
@@ -98,6 +104,17 @@ export default {
     },
   },
   methods: {
+    formatDateTime(dateTime) {
+      const date = new Date(dateTime);
+      const options = {
+        month: "short",
+        day: "2-digit",
+        hour: "numeric",
+        minute: "numeric",
+        hour12: true,
+      };
+      return date.toLocaleString("en-US", options);
+    },
     async fetchLatestMatchWeek() {
       this.isLoading = true;
       try {
@@ -212,6 +229,16 @@ export default {
 .vs-sign {
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.vs-sign p {
+  margin: 0px;
+}
+
+.match-details {
+  font-weight: 100;
 }
 
 .score-container {

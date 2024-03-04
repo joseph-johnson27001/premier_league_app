@@ -4,6 +4,19 @@
   </div>
   <div v-else class="results-page">
     <h2>Results</h2>
+    <div class="matchday-dropdown">
+      <label for="matchday-select">Select Match Day:</label>
+      <select
+        id="matchday-select"
+        v-model="selectedMatchday"
+        @change="fetchMatchesByMatchday"
+      >
+        <option v-for="matchday in matchdays" :key="matchday" :value="matchday">
+          {{ matchday }}
+        </option>
+      </select>
+    </div>
+
     <div class="fixtures-list">
       <div
         v-for="result in filteredResults"
@@ -36,7 +49,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import axios from "axios";
 import loadingAnimation from "@/components/LoadingAnimation.vue";
@@ -53,6 +65,8 @@ export default {
       teamCrests: {},
       selectedMatchData: {},
       isLoading: true,
+      selectedMatchday: 1,
+      matchdays: [],
     };
   },
   created() {
@@ -71,6 +85,11 @@ export default {
       }
     },
   },
+  watch: {
+    selectedMatchday(newMatchday) {
+      this.fetchMatchesByMatchday(newMatchday);
+    },
+  },
   methods: {
     async fetchTeamsAndResults() {
       this.isLoading = true;
@@ -80,7 +99,6 @@ export default {
           crestMap[team.name] = team.crest;
           return crestMap;
         }, {});
-
         const resultsResponse = await axios.get(
           "/api/competitions/PL/matches?status=FINISHED"
         );
@@ -88,15 +106,35 @@ export default {
         this.results = resultsResponse.data.matches.filter(
           (result) => new Date(result.utcDate) <= currentDate
         );
+        this.matchdays = [
+          ...new Set(this.results.map((result) => result.matchday)),
+        ];
+        this.fetchMatchesByMatchday(this.selectedMatchday);
       } catch (error) {
         console.error("Error fetching teams and results:", error);
       }
       this.isLoading = false;
     },
+    async fetchMatchesByMatchday(matchday) {
+      this.isLoading = true;
+      try {
+        const matchesResponse = await axios.get(
+          `/api/competitions/PL/matches?status=FINISHED&matchday=${matchday}`
+        );
+        const currentDate = new Date();
+        this.results = matchesResponse.data.matches.filter(
+          (result) => new Date(result.utcDate) <= currentDate
+        );
+        console.log("Matches fetched for matchday:", matchday);
+        this.isLoading = false;
+      } catch (error) {
+        console.error("Error fetching matches for matchday:", matchday, error);
+      }
+    },
+
     getTeamName(teamName) {
       return teamName.replace(/FC$/, "").trim();
     },
-
     getTeamCrest(teamName) {
       return this.teamCrests[teamName] || "";
     },

@@ -127,16 +127,16 @@ export default {
       this.isLoading = true;
       try {
         const matchesResponse = await axios.get(
-          `/api/competitions/PL/matches?status=FINISHED&matchday=${matchday}`
+          `/api/competitions/PL/matches?status=SCHEDULED&matchday=${matchday}`
         );
         const currentDate = new Date();
-        this.results = matchesResponse.data.matches.filter(
-          (result) => new Date(result.utcDate) <= currentDate
+        this.fixtures = matchesResponse.data.matches.filter(
+          (fixture) => new Date(fixture.utcDate) > currentDate
         );
-        console.log("Matches fetched for matchday:", matchday);
+        console.log("Fixtures fetched for matchday:", matchday);
         this.isLoading = false;
       } catch (error) {
-        console.error("Error fetching matches for matchday:", matchday, error);
+        console.error("Error fetching fixtures for matchday:", matchday, error);
       }
     },
 

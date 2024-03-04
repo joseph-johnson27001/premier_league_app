@@ -5,7 +5,7 @@
   <div v-else class="results-page">
     <h2>Results</h2>
     <div class="matchday-dropdown">
-      <label for="matchday-select">Select Match Day:</label>
+      <label for="matchday-select">Select Match Week: </label>
       <select
         id="matchday-select"
         v-model="selectedMatchday"
@@ -213,5 +213,20 @@ export default {
 .team-crest {
   max-width: 30px;
   margin: 10px;
+}
+
+.matchday-dropdown {
+  margin-bottom: 20px;
+}
+
+.matchday-dropdown label {
+  margin-right: 10px;
+}
+
+.matchday-dropdown select {
+  padding: 8px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
 }
 </style>

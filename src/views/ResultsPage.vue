@@ -49,6 +49,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import axios from "axios";
 import loadingAnimation from "@/components/LoadingAnimation.vue";
@@ -70,7 +71,7 @@ export default {
     };
   },
   created() {
-    this.fetchTeamsAndResults();
+    this.fetchLatestMatchWeek();
   },
   computed: {
     filteredResults() {
@@ -91,7 +92,7 @@ export default {
     },
   },
   methods: {
-    async fetchTeamsAndResults() {
+    async fetchLatestMatchWeek() {
       this.isLoading = true;
       try {
         const teamsResponse = await axios.get("/api/competitions/PL/teams");
@@ -109,6 +110,7 @@ export default {
         this.matchdays = [
           ...new Set(this.results.map((result) => result.matchday)),
         ];
+        this.selectedMatchday = Math.max(...this.matchdays);
         this.fetchMatchesByMatchday(this.selectedMatchday);
       } catch (error) {
         console.error("Error fetching teams and results:", error);
@@ -224,7 +226,7 @@ export default {
 }
 
 .matchday-dropdown select {
-  padding: 8px 8px;
+  padding: 8px 4px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 16px;

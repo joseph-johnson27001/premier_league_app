@@ -19,6 +19,10 @@
         </select>
       </div>
     </span>
+    <div v-show="!isLoading && this.filteredFixtures.length == 0">
+      The free API has hit its limit for 10 calls every minute. Please wait and
+      try again.
+    </div>
     <div v-if="isLoading" class="animation-container">
       <loadingAnimation />
     </div>

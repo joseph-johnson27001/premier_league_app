@@ -1,49 +1,57 @@
 <template>
-  <div v-if="isLoading" class="animation-container">
-    <loadingAnimation />
-  </div>
-  <div v-else class="results-page">
-    <h2>Results</h2>
-    <div class="matchday-dropdown">
-      <label for="matchday-select">Select Match Week: </label>
-      <select
-        id="matchday-select"
-        v-model="selectedMatchday"
-        @change="fetchMatchesByMatchday"
-      >
-        <option v-for="matchday in matchdays" :key="matchday" :value="matchday">
-          {{ matchday }}
-        </option>
-      </select>
+  <div>
+    <span class="heading-span">
+      <h2>Results</h2>
+      <div class="matchday-dropdown">
+        <label for="matchday-select">Select Match Week: </label>
+        <select
+          id="matchday-select"
+          v-model="selectedMatchday"
+          @change="fetchMatchesByMatchday"
+        >
+          <option
+            v-for="matchday in matchdays"
+            :key="matchday"
+            :value="matchday"
+          >
+            {{ matchday }}
+          </option>
+        </select>
+      </div>
+    </span>
+    <div v-if="isLoading" class="animation-container">
+      <loadingAnimation />
     </div>
-
-    <div class="fixtures-list">
-      <div
-        v-for="result in filteredResults"
-        :key="result.id"
-        class="fixture-item"
-        @click="toggleFixtureDetails(result.id)"
-      >
-        <div class="team-container team-left">
-          <img
-            :src="getTeamCrest(result.homeTeam.name)"
-            :alt="result.homeTeam.name"
-            class="team-crest"
-          />
-          <div class="team-name">{{ getTeamName(result.homeTeam.name) }}</div>
-        </div>
-        <div class="score-container">
-          <span class="score" v-if="result.status === 'FINISHED'">
-            {{ result.score.fullTime.home }} - {{ result.score.fullTime.away }}
-          </span>
-        </div>
-        <div class="team-container team-right">
-          <div class="team-name">{{ getTeamName(result.awayTeam.name) }}</div>
-          <img
-            :src="getTeamCrest(result.awayTeam.name)"
-            :alt="result.awayTeam.name"
-            class="team-crest"
-          />
+    <div v-else class="results-page">
+      <div class="fixtures-list">
+        <div
+          v-for="result in filteredResults"
+          :key="result.id"
+          class="fixture-item"
+          @click="toggleFixtureDetails(result.id)"
+        >
+          <div class="team-container team-left">
+            <img
+              :src="getTeamCrest(result.homeTeam.name)"
+              :alt="result.homeTeam.name"
+              class="team-crest"
+            />
+            <div class="team-name">{{ getTeamName(result.homeTeam.name) }}</div>
+          </div>
+          <div class="score-container">
+            <span class="score" v-if="result.status === 'FINISHED'">
+              {{ result.score.fullTime.home }} -
+              {{ result.score.fullTime.away }}
+            </span>
+          </div>
+          <div class="team-container team-right">
+            <div class="team-name">{{ getTeamName(result.awayTeam.name) }}</div>
+            <img
+              :src="getTeamCrest(result.awayTeam.name)"
+              :alt="result.awayTeam.name"
+              class="team-crest"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -162,6 +170,12 @@ export default {
 </script>
 
 <style scoped>
+.heading-span {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .fixtures-list {
   display: flex;
   flex-direction: column-reverse;
@@ -218,7 +232,9 @@ export default {
 }
 
 .matchday-dropdown {
-  margin-bottom: 20px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .matchday-dropdown label {

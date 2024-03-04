@@ -88,6 +88,10 @@ export default {
 </script>
 
 <style scoped>
+h2 {
+  margin-bottom: 10px;
+}
+
 .table-header {
   text-align: center;
   margin-bottom: 20px;

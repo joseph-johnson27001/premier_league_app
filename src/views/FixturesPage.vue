@@ -254,6 +254,9 @@ export default {
 
 .matchday-dropdown {
   margin-bottom: 20px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .matchday-dropdown label {

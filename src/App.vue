@@ -26,6 +26,7 @@ body {
   margin: 0;
   padding: 0;
 }
+
 #app {
   font-family: "Montserrat";
 }
@@ -46,7 +47,7 @@ body {
 }
 
 .animation-container {
-  height: 100vh;
+  height: 50vh;
   display: flex;
   place-items: center;
   margin: auto;

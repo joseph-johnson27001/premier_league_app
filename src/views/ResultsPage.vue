@@ -1,5 +1,6 @@
 <template>
-  <div class="results-page">
+  <div v-if="isLoading">Loading...</div>
+  <div v-else class="results-page">
     <h2>Results</h2>
     <div class="fixtures-list">
       <div
@@ -45,6 +46,7 @@ export default {
       results: [],
       teamCrests: {},
       selectedMatchData: {},
+      isLoading: true,
     };
   },
   created() {
@@ -65,6 +67,7 @@ export default {
   },
   methods: {
     async fetchTeamsAndResults() {
+      this.isLoading = true;
       try {
         const teamsResponse = await axios.get("/api/competitions/PL/teams");
         this.teamCrests = teamsResponse.data.teams.reduce((crestMap, team) => {
@@ -82,6 +85,7 @@ export default {
       } catch (error) {
         console.error("Error fetching teams and results:", error);
       }
+      this.isLoading = false;
     },
     getTeamName(teamName) {
       return teamName.replace(/FC$/, "").trim();

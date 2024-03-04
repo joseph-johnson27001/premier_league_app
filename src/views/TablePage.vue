@@ -1,6 +1,8 @@
 <template>
   <div>
-    <div v-if="isLoading">Loading...</div>
+    <div v-if="isLoading" class="animation-container">
+      <loadingAnimation />
+    </div>
     <table v-else class="team-table">
       <thead>
         <tr>
@@ -47,8 +49,12 @@
 
 <script>
 import axios from "axios";
+import loadingAnimation from "@/components/LoadingAnimation.vue";
 
 export default {
+  components: {
+    loadingAnimation,
+  },
   data() {
     return {
       premierLeagueStandings: [],

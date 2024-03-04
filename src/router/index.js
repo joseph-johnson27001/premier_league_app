@@ -4,14 +4,14 @@ import TablePage from "@/views/TablePage.vue";
 import FixturesPage from "@/views/FixturesPage.vue";
 import ResultsPage from "@/views/ResultsPage.vue";
 import TeamsPage from "@/views/TeamsPage.vue";
-import TeamPage from "@/views/TeamPage.vue"; // Import the TeamPage component
+import TeamPage from "@/views/TeamPage.vue";
 import PlayerProfilePage from "@/components/PlayerProfilePage.vue";
 import NewsPage from "@/views/NewsPage.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
-  { path: "/", redirect: "/table" }, // Redirect / to /table
+  { path: "/", redirect: "/table" },
   { path: "/table", component: TablePage },
   { path: "/fixtures", component: FixturesPage },
   { path: "/results", component: ResultsPage },

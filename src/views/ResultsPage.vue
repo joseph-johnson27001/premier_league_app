@@ -1,5 +1,7 @@
 <template>
-  <div v-if="isLoading">Loading...</div>
+  <div v-if="isLoading" class="animation-container">
+    <loadingAnimation />
+  </div>
   <div v-else class="results-page">
     <h2>Results</h2>
     <div class="fixtures-list">
@@ -37,9 +39,13 @@
 
 <script>
 import axios from "axios";
+import loadingAnimation from "@/components/LoadingAnimation.vue";
 
 export default {
   name: "ResultsPage",
+  components: {
+    loadingAnimation,
+  },
   data() {
     return {
       selectedTeams: [],

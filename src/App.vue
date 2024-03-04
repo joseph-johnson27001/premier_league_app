@@ -44,4 +44,12 @@ body {
   width: 100%;
   padding: 20px;
 }
+
+.animation-container {
+  height: 100vh;
+  display: flex;
+  place-items: center;
+  margin: auto;
+  justify-content: center;
+}
 </style>

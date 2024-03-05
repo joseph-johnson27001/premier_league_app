@@ -86,7 +86,7 @@ export default {
     };
   },
   created() {
-    this.fetchLatestMatchWeek();
+    this.fetchMatchesAndTeams();
   },
   computed: {
     filteredFixtures() {
@@ -101,11 +101,6 @@ export default {
       }
     },
   },
-  watch: {
-    selectedMatchday(newMatchday) {
-      this.fetchMatchesByMatchday(newMatchday);
-    },
-  },
   methods: {
     formatDateTime(dateTime) {
       const date = new Date(dateTime);
@@ -118,18 +113,17 @@ export default {
       };
       return date.toLocaleString("en-US", options);
     },
-
-    async fetchLatestMatchWeek() {
+    async fetchMatchesAndTeams() {
       this.isLoading = true;
       try {
-        const teamsResponse = await axios.get("/api/competitions/PL/teams");
+        const [teamsResponse, fixturesResponse] = await Promise.all([
+          axios.get("/api/competitions/PL/teams"),
+          axios.get("/api/competitions/PL/matches?status=SCHEDULED"),
+        ]);
         this.teamCrests = teamsResponse.data.teams.reduce((crestMap, team) => {
           crestMap[team.name] = team.crest;
           return crestMap;
         }, {});
-        const fixturesResponse = await axios.get(
-          "/api/competitions/PL/matches?status=SCHEDULED"
-        );
         const currentDate = new Date();
         this.fixtures = fixturesResponse.data.matches.filter(
           (fixture) => new Date(fixture.utcDate) > currentDate
@@ -138,12 +132,12 @@ export default {
           ...new Set(this.fixtures.map((fixture) => fixture.matchday)),
         ];
         this.selectedMatchday = this.matchdays[0];
-        this.fetchMatchesByMatchday(this.selectedMatchday);
       } catch (error) {
         console.error("Error fetching teams and fixtures:", error);
       }
       this.isLoading = false;
     },
+
     async fetchMatchesByMatchday(matchday) {
       this.isLoading = true;
       try {
@@ -155,10 +149,10 @@ export default {
           (fixture) => new Date(fixture.utcDate) > currentDate
         );
         console.log("Fixtures fetched for matchday:", matchday);
-        this.isLoading = false;
       } catch (error) {
         console.error("Error fetching fixtures for matchday:", matchday, error);
       }
+      this.isLoading = false;
     },
 
     getTeamName(teamName) {

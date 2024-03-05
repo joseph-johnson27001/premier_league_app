@@ -106,14 +106,14 @@ export default {
     async fetchLatestMatchWeek() {
       this.isLoading = true;
       try {
-        const teamsResponse = await axios.get("/api/competitions/PL/teams");
+        const [teamsResponse, resultsResponse] = await Promise.all([
+          axios.get("/api/competitions/PL/teams"),
+          axios.get("/api/competitions/PL/matches?status=FINISHED"),
+        ]);
         this.teamCrests = teamsResponse.data.teams.reduce((crestMap, team) => {
           crestMap[team.name] = team.crest;
           return crestMap;
         }, {});
-        const resultsResponse = await axios.get(
-          "/api/competitions/PL/matches?status=FINISHED"
-        );
         const currentDate = new Date();
         this.results = resultsResponse.data.matches.filter(
           (result) => new Date(result.utcDate) <= currentDate
@@ -129,6 +129,9 @@ export default {
       this.isLoading = false;
     },
     async fetchMatchesByMatchday(matchday) {
+      if (matchday === this.selectedMatchday) {
+        return;
+      }
       this.isLoading = true;
       try {
         const matchesResponse = await axios.get(

@@ -7,11 +7,7 @@
         class="matchday-dropdown"
       >
         <label for="matchday-select">Select Match Week: </label>
-        <select
-          id="matchday-select"
-          v-model="selectedMatchday"
-          @change="fetchMatchesByMatchday"
-        >
+        <select id="matchday-select" v-model="selectedMatchday">
           <option
             v-for="matchday in matchdays"
             :key="matchday"

@@ -2,7 +2,10 @@
   <div>
     <span class="heading-span">
       <h2>Fixtures</h2>
-      <div class="matchday-dropdown">
+      <div
+        v-if="!isLoading && this.filteredFixtures.length > 0"
+        class="matchday-dropdown"
+      >
         <label for="matchday-select">Select Match Week: </label>
         <select
           id="matchday-select"

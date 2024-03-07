@@ -3,9 +3,6 @@
     <loadingAnimation />
   </div>
   <div class="all-teams-page" v-else>
-    <div class="teams-header">
-      <h1 class="teams-name">Premier League Teams</h1>
-    </div>
     <div class="team-list">
       <router-link
         v-for="team in teams"

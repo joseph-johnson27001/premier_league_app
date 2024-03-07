@@ -203,10 +203,10 @@ export default {
 
 .fixture-item {
   background-color: #f8f8f8;
-  padding: 10px;
+  border: 1px solid #ccc;
   border-radius: 4px;
-  border: 1px solid #999;
   margin: 10px 0;
+  padding: 10px;
   width: 100%;
   display: grid;
   grid-template-columns: 4fr 1fr 4fr;

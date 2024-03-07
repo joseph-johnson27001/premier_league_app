@@ -195,7 +195,7 @@ export default {
   background-color: #f8f8f8;
   padding: 10px;
   border-radius: 4px;
-  border: 1px solid #999;
+  border: 1px solid #ccc;
   margin: 10px 0;
   width: 100%;
   display: grid;

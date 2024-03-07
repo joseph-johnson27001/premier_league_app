@@ -63,24 +63,25 @@ export default {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 20px;
-  margin-top: 20px;
 }
 
 .team-card {
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #f8f8f8;
+  border: 1px solid #999;
+  border-radius: 4px;
   padding: 20px;
   max-height: 250px;
   overflow: hidden;
-  transition: transform 0.3s, box-shadow 0.3s;
   cursor: pointer;
   text-align: center;
+  border: 1px solid #ccc;
+  transition: border-color 0.1s, box-shadow 0.1s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .team-card:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  border-color: #1f8dd6;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
 .team-logo-container {
@@ -96,9 +97,7 @@ export default {
 }
 
 .team-card-title {
-  font-size: 24px;
-  font-weight: bold;
-  margin-top: 10px;
+  font-size: 18px;
   color: #333;
   white-space: nowrap;
   overflow: hidden;

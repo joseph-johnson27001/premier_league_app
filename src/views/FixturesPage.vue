@@ -101,6 +101,11 @@ export default {
       }
     },
   },
+  watch: {
+    selectedMatchday(newMatchday) {
+      this.fetchMatchesByMatchday(newMatchday);
+    },
+  },
   methods: {
     formatDateTime(dateTime) {
       const date = new Date(dateTime);

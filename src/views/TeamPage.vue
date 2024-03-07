@@ -1,6 +1,6 @@
 <template>
-  <div v-if="isLoading" class="loading-indicator">
-    <p>Loading...</p>
+  <div v-if="isLoading" class="animation-container">
+    <loadingAnimation />
   </div>
   <div class="team-page" v-else>
     <div class="team-header">
@@ -45,8 +45,12 @@
 
 <script>
 import axios from "axios";
+import loadingAnimation from "@/components/LoadingAnimation.vue";
 
 export default {
+  components: {
+    loadingAnimation,
+  },
   data() {
     return {
       selectedTeamId: this.$route.params.teamId,

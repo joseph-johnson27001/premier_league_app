@@ -82,7 +82,7 @@ export default {
     };
   },
   created() {
-    this.fetchLatestMatchWeek();
+    this.fetchInitialData();
   },
   computed: {
     filteredResults() {
@@ -103,7 +103,7 @@ export default {
     },
   },
   methods: {
-    async fetchLatestMatchWeek() {
+    async fetchInitialData() {
       this.isLoading = true;
       try {
         const [teamsResponse, resultsResponse] = await Promise.all([
@@ -129,23 +129,25 @@ export default {
       this.isLoading = false;
     },
     async fetchMatchesByMatchday(matchday) {
-      if (matchday === this.selectedMatchday) {
-        return;
-      }
       this.isLoading = true;
       try {
         const matchesResponse = await axios.get(
           `/api/competitions/PL/matches?status=FINISHED&matchday=${matchday}`
         );
         const currentDate = new Date();
-        this.results = matchesResponse.data.matches.filter(
+        const newResults = matchesResponse.data.matches.filter(
           (result) => new Date(result.utcDate) <= currentDate
         );
+        this.results.splice(0, this.results.length, ...newResults);
         console.log("Matches fetched for matchday:", matchday);
-        this.isLoading = false;
       } catch (error) {
         console.error("Error fetching matches for matchday:", matchday, error);
       }
+      this.isLoading = false;
+    },
+    handleMatchdayChange(newMatchday) {
+      this.selectedMatchday = newMatchday;
+      this.fetchMatchesByMatchday(newMatchday);
     },
 
     getTeamName(teamName) {

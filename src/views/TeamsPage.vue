@@ -19,7 +19,6 @@
             />
           </div>
           <h3 class="team-card-title">{{ team.name }}</h3>
-          <p class="team-card-founded">Founded: {{ team.founded }}</p>
         </div>
       </router-link>
     </div>
@@ -58,24 +57,11 @@ export default {
 <style scoped>
 .all-teams-page {
   font-family: "Arial", sans-serif;
-  background-color: #f5f5f5;
-}
-
-.teams-header {
-  background-color: #333;
-  color: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  margin: -20px -20px 20px -20px;
 }
 
 .team-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 20px;
   margin-top: 20px;
 }
@@ -93,8 +79,8 @@ export default {
 }
 
 .team-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
 .team-logo-container {

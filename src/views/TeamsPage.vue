@@ -97,7 +97,6 @@ export default {
 }
 
 .team-card-title {
-  font-size: 18px;
   color: #333;
   white-space: nowrap;
   overflow: hidden;

@@ -31,6 +31,11 @@ body {
   font-family: "Montserrat";
 }
 
+h2 {
+  font-weight: 100;
+  margin-bottom: 10px !important;
+}
+
 .background {
   background-color: #f2f2f2;
   display: flex;

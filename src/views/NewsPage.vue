@@ -1,8 +1,6 @@
 <template>
   <div class="news-page">
-    <div class="news-header">
-      <h1 class="news-name">Premier League News</h1>
-    </div>
+    <h2>News</h2>
     <div class="news-list">
       <div v-for="story in sportsNews" :key="story.id" class="news-item">
         <img :src="story.image" alt="News Image" class="news-image" />

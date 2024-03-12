@@ -226,7 +226,6 @@ export default {
   justify-content: flex-end;
 }
 .score {
-  font-size: 18px;
   text-align: center;
 }
 

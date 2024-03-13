@@ -1,13 +1,17 @@
 <template>
   <div class="landing-page">
     <p>Please select your favorite team:</p>
-    <select v-model="selectedTeam" class="team-select">
-      <option value="">Select a team...</option>
-      <option v-for="team in teams" :key="team.id" :value="team.id">
+    <div class="team-grid">
+      <div
+        v-for="team in teams"
+        :key="team.id"
+        class="team-square"
+        @click="selectTeam(team)"
+      >
         <img :src="team.crest" :alt="team.name" class="team-badge" />
-        {{ team.name }}
-      </option>
-    </select>
+        <div class="team-name">{{ team.name }}</div>
+      </div>
+    </div>
     <button @click="next" class="next-button">Next</button>
   </div>
 </template>
@@ -19,7 +23,7 @@ export default {
   name: "LandingPage",
   data() {
     return {
-      selectedTeam: "",
+      selectedTeam: null,
       teams: [],
     };
   },
@@ -39,6 +43,10 @@ export default {
         console.error("Error fetching teams:", error);
       }
     },
+    selectTeam(team) {
+      this.selectedTeam = team.id;
+      console.log("Selected Team:", team);
+    },
     next() {
       console.log("Selected Team:", this.selectedTeam);
     },
@@ -52,32 +60,36 @@ export default {
   margin-top: 50px;
 }
 
-.team-select {
-  margin-bottom: 20px;
-  padding: 8px 12px;
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  justify-items: center;
+}
+
+.team-square {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
   border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-}
-
-.team-badge {
-  width: 24px;
-  height: 24px;
-  margin-right: 8px;
-}
-
-.next-button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
+  border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-.next-button:hover {
-  background-color: #0056b3;
+.team-square:hover {
+  background-color: #f5f5f5;
+}
+
+.team-badge {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 10px;
+}
+
+.team-name {
+  font-size: 16px;
 }
 </style>

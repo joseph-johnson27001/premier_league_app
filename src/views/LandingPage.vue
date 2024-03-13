@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1>Welcome to the Loading Page</h1>
     <p>Please select your favorite team:</p>
     <select v-model="selectedTeam">
       <option value="">Select a team...</option>
@@ -13,6 +14,7 @@
 
 <script>
 export default {
+  name: "LandingPage",
   data() {
     return {
       selectedTeam: "",
@@ -25,7 +27,6 @@ export default {
   },
   methods: {
     next() {
-      // Perform actions when the "Next" button is clicked
       console.log("Selected Team:", this.selectedTeam);
     },
   },

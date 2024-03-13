@@ -7,7 +7,7 @@ import TeamsPage from "@/views/TeamsPage.vue";
 import TeamPage from "@/views/TeamPage.vue";
 import PlayerProfilePage from "@/components/PlayerProfilePage.vue";
 import NewsPage from "@/views/NewsPage.vue";
-import LadningPage from "@/views/LandingPage.vue";
+import LandingPage from "@/views/LandingPage.vue";
 
 Vue.use(VueRouter);
 

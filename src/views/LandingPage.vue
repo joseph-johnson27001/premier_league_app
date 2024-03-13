@@ -16,7 +16,6 @@
           <div class="team-name">{{ team.name }}</div>
         </div>
       </div>
-      <button @click="next" class="next-button">Next</button>
     </div>
   </div>
 </template>

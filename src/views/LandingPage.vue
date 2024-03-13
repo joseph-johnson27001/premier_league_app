@@ -94,8 +94,7 @@ export default {
 }
 
 .team-badge {
-  width: 60px;
-  height: 60px;
+  width: 75px;
   margin-bottom: 10px;
 }
 

@@ -1,7 +1,7 @@
 <template>
   <div>
     <span class="heading-span">
-      <h2>Results</h2>
+      <p>Results:</p>
       <div
         v-if="!isLoading && this.filteredResults.length > 0"
         class="matchday-dropdown"

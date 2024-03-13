@@ -86,11 +86,13 @@ export default {
   border: 1px solid #ccc;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: border-color 0.1s linear, box-shadow 0.1s linear;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #f5f5f5;
 }
 
 .team-square:hover {
-  background-color: #f5f5f5;
+  border-color: #1f8dd6;
 }
 
 .team-badge {

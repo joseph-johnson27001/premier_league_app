@@ -7,12 +7,14 @@ import TeamsPage from "@/views/TeamsPage.vue";
 import TeamPage from "@/views/TeamPage.vue";
 import PlayerProfilePage from "@/components/PlayerProfilePage.vue";
 import NewsPage from "@/views/NewsPage.vue";
+import LadningPage from "@/views/LandingPage.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
-  { path: "/", redirect: "/table" },
+  { path: "/", redirect: "/landing-page" },
   { path: "/table", component: TablePage },
+  { path: "/ladning-page", component: LandingPage },
   { path: "/fixtures", component: FixturesPage },
   { path: "/results", component: ResultsPage },
   { path: "/teams", component: TeamsPage },

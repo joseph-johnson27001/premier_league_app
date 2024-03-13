@@ -46,20 +46,20 @@ export default {
         const response = await axios.get("/api/competitions/PL/teams");
         this.teams = response.data.teams.map((team) => ({
           id: team.id,
-          name: team.name,
+          name: this.getTeamName(team.name),
           crest: team.crest,
         }));
+        this.teams.sort((a, b) => (a.name > b.name ? 1 : -1));
       } catch (error) {
         console.error("Error fetching teams:", error);
       }
       this.isLoading = false;
     },
-    selectTeam(team) {
-      this.selectedTeam = team.id;
-      console.log("Selected Team:", team);
+    getTeamName(teamName) {
+      return teamName.replace(/FC$/, "").trim();
     },
-    next() {
-      console.log("Selected Team:", this.selectedTeam);
+    selectTeam(team) {
+      console.log(team);
     },
   },
 };

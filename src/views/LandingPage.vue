@@ -68,11 +68,13 @@ export default {
 }
 
 .team-square {
+  width: 200px;
+  height: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  /* padding: 20px; */
   border: 1px solid #ccc;
   border-radius: 8px;
   cursor: pointer;

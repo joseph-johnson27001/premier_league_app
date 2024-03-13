@@ -33,7 +33,7 @@ export default {
         this.teams = response.data.teams.map((team) => ({
           id: team.id,
           name: team.name,
-          crest: team.crestUrl,
+          crest: team.crest,
         }));
       } catch (error) {
         console.error("Error fetching teams:", error);

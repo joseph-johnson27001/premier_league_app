@@ -14,7 +14,7 @@ Vue.use(VueRouter);
 const routes = [
   { path: "/", redirect: "/landing-page" },
   { path: "/table", component: TablePage },
-  { path: "/ladning-page", component: LandingPage },
+  { path: "/landing-page", component: LandingPage },
   { path: "/fixtures", component: FixturesPage },
   { path: "/results", component: ResultsPage },
   { path: "/teams", component: TeamsPage },

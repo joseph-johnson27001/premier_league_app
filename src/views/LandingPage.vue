@@ -1,30 +1,40 @@
 <template>
   <div class="landing-page">
-    <p>Please select your favorite team:</p>
-    <div class="team-grid">
-      <div
-        v-for="team in teams"
-        :key="team.id"
-        class="team-square"
-        @click="selectTeam(team)"
-      >
-        <img :src="team.crest" :alt="team.name" class="team-badge" />
-        <div class="team-name">{{ team.name }}</div>
-      </div>
+    <div v-if="isLoading" class="animation-container">
+      <loadingAnimation />
     </div>
-    <button @click="next" class="next-button">Next</button>
+    <div v-else>
+      <p>Please select your favorite team:</p>
+      <div class="team-grid">
+        <div
+          v-for="team in teams"
+          :key="team.id"
+          class="team-square"
+          @click="selectTeam(team)"
+        >
+          <img :src="team.crest" :alt="team.name" class="team-badge" />
+          <div class="team-name">{{ team.name }}</div>
+        </div>
+      </div>
+      <button @click="next" class="next-button">Next</button>
+    </div>
   </div>
 </template>
 
 <script>
+import loadingAnimation from "@/components/LoadingAnimation.vue";
 import axios from "axios";
 
 export default {
   name: "LandingPage",
+  components: {
+    loadingAnimation,
+  },
   data() {
     return {
       selectedTeam: null,
       teams: [],
+      isLoading: true,
     };
   },
   created() {
@@ -42,6 +52,7 @@ export default {
       } catch (error) {
         console.error("Error fetching teams:", error);
       }
+      this.isLoading = false;
     },
     selectTeam(team) {
       this.selectedTeam = team.id;
@@ -57,7 +68,6 @@ export default {
 <style scoped>
 .landing-page {
   text-align: center;
-  margin-top: 50px;
 }
 
 .team-grid {
@@ -74,7 +84,6 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* padding: 20px; */
   border: 1px solid #ccc;
   border-radius: 8px;
   cursor: pointer;

@@ -58,7 +58,8 @@ export default {
       return teamName.replace(/FC$/, "").trim();
     },
     selectTeam(team) {
-      console.log(team);
+      // Navigate to the table page with the selected team ID as a route parameter
+      this.$router.push({ name: "Team", params: { teamId: team.id } });
     },
   },
 };

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>Standings:</p>
+    <!-- <p>Standings:</p> -->
     <div v-if="isLoading" class="animation-container">
       <loadingAnimation />
     </div>

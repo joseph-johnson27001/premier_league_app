@@ -9,6 +9,7 @@
         v-for="team in teams"
         :key="team.id"
         :to="`/teams/${team.id}`"
+        @click="selectTeam(team)"
       >
         <div class="team-logo-container">
           <img
@@ -48,6 +49,11 @@ export default {
     } catch (error) {
       console.error("Error fetching teams:", error);
     }
+  },
+  methods: {
+    selectTeam(team) {
+      this.$router.push({ name: "Team", params: { teamId: team.id } });
+    },
   },
 };
 </script>

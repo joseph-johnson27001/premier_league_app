@@ -39,7 +39,7 @@
               :alt="team.team.name"
               class="team-crest"
             />
-            {{ getTeamName(team.team.name) }}
+            <span class="team-name">{{ getTeamName(team.team.name) }}</span>
           </td>
           <td>{{ team.playedGames }}</td>
           <td>{{ team.won }}</td>
@@ -128,9 +128,10 @@ h2 {
   background-color: #f5f5f5;
 }
 .team-crest {
-  width: 24px;
-  height: auto;
-  margin-right: 8px;
+  height: 24px;
+}
+.team-name {
+  margin-left: 8px;
 }
 /* Responsive Styles */
 @media (max-width: 768px) {

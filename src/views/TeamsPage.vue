@@ -93,6 +93,7 @@ export default {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin: 0px;
 }
 
 .team-logo-container {

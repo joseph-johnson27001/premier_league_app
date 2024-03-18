@@ -4,23 +4,21 @@
   </div>
   <div class="all-teams-page" v-else>
     <div class="team-list">
-      <router-link
+      <div
+        class="team-card"
         v-for="team in teams"
         :key="team.id"
         :to="`/teams/${team.id}`"
-        class="team-card-link"
       >
-        <div class="team-card">
-          <div class="team-logo-container">
-            <img
-              :src="team.crest"
-              :alt="team.name + ' Crest'"
-              class="team-logo"
-            />
-          </div>
-          <h3 class="team-card-title">{{ team.name }}</h3>
+        <div class="team-logo-container">
+          <img
+            :src="team.crest"
+            :alt="team.name + ' Crest'"
+            class="team-logo"
+          />
         </div>
-      </router-link>
+        <p class="team-card-title">{{ team.name }}</p>
+      </div>
     </div>
   </div>
 </template>
@@ -61,46 +59,45 @@ export default {
 
 .team-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
+  justify-items: center;
 }
 
 .team-card {
-  background-color: #f8f8f8;
-  border: 1px solid #999;
-  border-radius: 4px;
-  padding: 20px;
-  max-height: 250px;
-  overflow: hidden;
-  cursor: pointer;
-  text-align: center;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   border: 1px solid #ccc;
-  transition: border-color 0.1s, box-shadow 0.1s;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.1s linear, box-shadow 0.1s linear;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #f5f5f5;
 }
 
 .team-card:hover {
   border-color: #1f8dd6;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.team-card p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .team-logo-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 10px;
 }
 
 .team-logo {
-  width: 80px;
-  height: 80px;
-}
-
-.team-card-title {
-  color: #333;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  width: 75px;
+  margin-bottom: 10px;
 }
 
 .team-card-founded {

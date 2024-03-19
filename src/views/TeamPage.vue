@@ -188,15 +188,14 @@ export default {
 .player-card {
   background-color: white;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition: border-color 0.1s linear;
   cursor: pointer;
+  border: 1px solid #ccc;
 }
 
 .player-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  border-color: #1f8dd6;
 }
 
 .player-name {

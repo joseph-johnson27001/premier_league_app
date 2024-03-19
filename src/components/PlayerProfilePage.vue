@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div v-if="loading" class="loading-indicator">
-      <p>Loading...</p>
+    <div v-if="loading" class="animation-container">
+      <loadingAnimation />
     </div>
     <div v-else>
       <div class="team-page">
@@ -72,9 +72,13 @@
 
 <script>
 import axios from "axios";
+import loadingAnimation from "@/components/LoadingAnimation.vue";
 
 export default {
   name: "PlayerProfilePage",
+  components: {
+    loadingAnimation,
+  },
   data() {
     return {
       player: {},

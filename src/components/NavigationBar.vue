@@ -43,7 +43,7 @@
 }
 
 .nav-link:hover {
-  color: #ffd700;
+  color: lightgrey;
 }
 
 .active-link,

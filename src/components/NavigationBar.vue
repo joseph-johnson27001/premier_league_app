@@ -39,7 +39,7 @@
   color: #fff;
   text-decoration: none;
   padding: 8px 12px;
-  transition: color 0.3s;
+  transition: color 0.1s;
 }
 
 .nav-link:hover {
